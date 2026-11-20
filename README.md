@@ -1,6 +1,11 @@
 # Maia — Privacy-First On-Device AI Companion
 
-Maia is a warm, protective, mother-archetype personal AI companion app for Android. Designed to stay entirely offline, she chats with you, remembers your life, and guarantees that your data never leaves your phone. 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Zero Network](https://img.shields.io/badge/Permissions-Zero_INTERNET-2e7d32.svg)](app/src/test/java/com/example/PermissionAuditTest.kt)
+[![Sponsor](https://img.shields.io/badge/Sponsor-GitHub_Sponsors-ea4aaa.svg?logo=githubsponsors)](https://github.com/sponsors/botmechanic)
+[![Website](https://img.shields.io/badge/Website-heymaia.app-c86d51.svg)](https://heymaia.app)
+
+Maia is a warm, protective, mother-archetype personal AI companion app for Android. Designed to stay entirely offline, she chats with you, remembers your life, and guarantees that your data never leaves your phone.
 
 **"She remembers. She protects. She's yours."**
 
@@ -172,6 +177,20 @@ Start the app. Maia will automatically scan your app-specific `models` directory
 
 - **[Product Requirements Document (PRD.md)](PRD.md):** Complete product specifications, architecture overview, performance SLAs, and roadmap.
 - **[On-Device AI Engineering Handbook (EDGE_AI_ENGINEERING_GUIDE.md)](EDGE_AI_ENGINEERING_GUIDE.md):** Deep technical documentation on on-device SLM runtime engineering, INT4 quantization, token budgeting, KV cache management, Tri-Store RAG, vector dot-product similarity, battery-aware WorkManager distillation, and hardware Keystore envelope encryption.
+
+---
+
+## ❤️ Support Maia & Open-Source Funding Milestones
+
+Big Tech wants your most intimate thoughts in their cloud. Maia is built to stay **100% open-source, ad-free, and mathematically private—forever.**
+
+Because Maia runs entirely on your device, there are no tracking SDKs, no subscriptions required for the open-source build, and no cloud data harvesting. Financial support directly funds independent development, test devices, and open on-device AI research:
+
+- [ ] **Milestone 1 (\$500) — Multi-Device Testing Lab:** Dedicated 6 GB / 8 GB mid-range Android test hardware and Play Store publishing infrastructure.
+- [ ] **Milestone 2 (\$2,000) — 100% Self-Contained Neural Voice:** Bundled on-device Whisper STT + Kokoro/Piper neural TTS so voice mode has zero reliance on Google's system speech recognizer.
+- [ ] **Milestone 3 (\$5,000) — Cross-Platform Sovereignty:** iOS companion port (Swift + MLX) and local QR / Wi-Fi Direct encrypted `.maiavault` migration between devices.
+
+👉 **[Sponsor Maia on GitHub](https://github.com/sponsors/botmechanic)** · **[Visit heymaia.app](https://heymaia.app)**
 
 ---
 
