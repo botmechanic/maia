@@ -1,13 +1,21 @@
-# Maia — Privacy-First On-Device AI Companion
+<p align="center">
+  <img src="docs/images/maia-header.png" alt="Maia — Privacy-First On-Device AI Companion" width="520" />
+</p>
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Zero Network](https://img.shields.io/badge/Permissions-Zero_INTERNET-2e7d32.svg)](app/src/test/java/com/example/PermissionAuditTest.kt)
-[![Sponsor](https://img.shields.io/badge/Sponsor-GitHub_Sponsors-ea4aaa.svg?logo=githubsponsors)](https://github.com/sponsors/botmechanic)
-[![Website](https://img.shields.io/badge/Website-heymaia.app-c86d51.svg)](https://heymaia.app)
+<h1 align="center">Maia — Privacy-First On-Device AI Companion</h1>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache 2.0" /></a>
+  <a href="app/src/test/java/com/example/PermissionAuditTest.kt"><img src="https://img.shields.io/badge/Permissions-Zero_INTERNET-2e7d32.svg" alt="Zero INTERNET Permission" /></a>
+  <a href="https://github.com/sponsors/botmechanic"><img src="https://img.shields.io/badge/Sponsor-GitHub_Sponsors-ea4aaa.svg?logo=githubsponsors" alt="Sponsor on GitHub" /></a>
+  <a href="https://heymaia.app"><img src="https://img.shields.io/badge/Website-heymaia.app-c86d51.svg" alt="heymaia.app" /></a>
+</p>
+
+<p align="center">
+  <strong>"She remembers. She protects. She's yours."</strong>
+</p>
 
 Maia is a warm, protective, mother-archetype personal AI companion app for Android. Designed to stay entirely offline, she chats with you, remembers your life, and guarantees that your data never leaves your phone.
-
-**"She remembers. She protects. She's yours."**
 
 ---
 
