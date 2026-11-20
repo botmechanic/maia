@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Evening Hearth window/splash colors -->
+    <color name="maia_canvas">#FF171310</color>
+    <color name="maia_surface">#FF221C16</color>
+    <color name="maia_ink">#FFF1EAE1</color>
+    <color name="maia_presence">#FFB5582F</color>
+</resources>

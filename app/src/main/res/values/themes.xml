@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorBackground">@color/maia_canvas</item>
+        <item name="android:windowBackground">@color/maia_canvas</item>
+        <item name="android:statusBarColor">@color/maia_canvas</item>
+        <item name="android:navigationBarColor">@color/maia_surface</item>
+        <item name="android:colorPrimary">@color/maia_presence</item>
+        <item name="android:textColorPrimary">@color/maia_ink</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Morning Hearth window/splash colors (Compose tokens live in ui/theme/Color.kt) -->
+    <color name="maia_canvas">#FFF8F5F0</color>
+    <color name="maia_surface">#FFFFFFFF</color>
+    <color name="maia_ink">#FF241D15</color>
+    <color name="maia_presence">#FFAF4F35</color>
+</resources>
