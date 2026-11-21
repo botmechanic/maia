@@ -309,5 +309,34 @@ When designing your own on-device AI applications in academic and industrial set
 
 ---
 
+## 8. Production Edge Performance & Hardening Optimizations
+
+Moving an on-device LLM app from a working prototype to a fast, Play Store–ready system requires solving mobile I/O, garbage-collection, memory-alignment, and lifecycle bottlenecks. Maia implements six concrete edge optimizations:
+
+### 8.1 Compact Binary Vector `BLOB` Storage (`VectorCodec.kt`)
+Located in: [`core/database/src/main/java/com/example/core/database/VectorCodec.kt`](core/database/src/main/java/com/example/core/database/VectorCodec.kt) and [`core/database/src/main/java/com/example/core/database/AppDatabase.kt`](core/database/src/main/java/com/example/core/database/AppDatabase.kt)
+- **Problem:** Storing 512-dimensional embeddings as comma-separated ASCII strings (`vector.joinToString(",")`) consumes ~5.5 KB per message and forces `String.split(",")` + `toFloatOrNull()` allocations across every row on every user turn—causing GC pauses before LLM prefill even starts.
+- **Optimization:** Room `MIGRATION_5_6` adds an `embeddingBlob BLOB` column and encodes vectors as packed little-endian IEEE-754 bytes (`ByteBuffer.allocate(512 * 4)` = **2,048 bytes**, ~2.7×–4× smaller with zero string parsing). `VectorCodec.decodeWithFallback()` transparently reads legacy v5 CSV rows so existing encrypted vaults upgrade with zero data loss.
+
+### 8.2 Direct Internal Storage vs. Android FUSE `/sdcard` Overhead (`BundledModelExtractor.kt`)
+Located in: [`core/runtime/src/main/java/com/example/core/runtime/BundledModelExtractor.kt`](core/runtime/src/main/java/com/example/core/runtime/BundledModelExtractor.kt)
+- **Problem:** Loading a 528 MB `.task` model from `/sdcard/Android/data/...` routes file I/O through Android's userspace FUSE layer, adding latency to model `mmap` and weight reads—and requiring manual `adb push` for users.
+- **Optimization:** Models bundled via Google Play Asset Delivery (`:model_pack`, `install-time`) are atomically staged (`.tmp` → rename) into app-private ext4/f2fs internal storage (`/data/user/0/app.heymaia/files/models/`). Both `MediaPipeModelRuntime` and `MediaPipeEmbeddingService` check internal storage directly, eliminating FUSE overhead while keeping `android.permission.INTERNET` stripped.
+
+### 8.3 16 KB Page-Size Native ELF Alignment
+- Upgraded SQLCipher to `net.zetetic:sqlcipher-android:4.6.1` and verified all `arm64-v8a` shared libraries (`libsqlcipher.so`, `libllm_inference_engine_jni.so`, `libmediapipe_tasks_text_jni.so`, `libandroidx.graphics.path.so`) are 16 KB ELF-aligned for modern Android kernels and Google Play requirements.
+
+### 8.4 Off-Main-Thread Embedder Initialization
+- `MediaPipeEmbeddingService.initializeEmbedder()` runs asynchronously on `Dispatchers.IO` inside [`MaiaAppContainer.kt`](app/src/main/java/com/example/di/MaiaAppContainer.kt), keeping cold-start UI rendering smooth and free of main-thread stalls.
+
+### 8.5 Hardware RAM Guardrail & Graceful Vault Recovery
+- **RAM Guardrail ([`DeviceCapabilityChecker.kt`](core/runtime/src/main/java/com/example/core/runtime/DeviceCapabilityChecker.kt)):** Inspects `ActivityManager.MemoryInfo.totalMem` to surface a calm compatibility notice on `< 5.5 GB` RAM devices and recommend `Gemma 4B` on `12 GB+` flagships.
+- **Keystore Recovery ([`VaultRecoveryScreen.kt`](app/src/main/java/com/example/ui/screens/VaultRecoveryScreen.kt)):** Catches `VaultKeyException` cleanly on startup instead of crashing if hardware Keystore keys are invalidated, allowing a safe encrypted vault reset.
+
+### 8.6 R8 Minification & JNI Keep Rules
+- Release builds run with `isMinifyEnabled = true` and `isShrinkResources = true` backed by targeted MediaPipe, FlatBuffers, and SQLCipher keep rules in [`app/proguard-rules.pro`](app/proguard-rules.pro), shrinking the release binary while preserving native JNI entrypoints.
+
+---
+
 *Documented with care for your journey into Edge AI Engineering.*
 

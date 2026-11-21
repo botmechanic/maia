@@ -25,11 +25,11 @@ Maia is a warm, protective, mother-archetype personal AI companion app for Andro
 
 ## 🎨 Design Philosophy & Tone
 
-Maia is shaped as a comforting, warm, and secure private space. Her voice is first-person, intimate, and protective. 
+Maia blends **Warm Architectural Precision** with **Apple-like Minimalism**—a calm, uncluttered private space that feels like archival stationery and candlelight rather than a clinical productivity tool (see [`docs/design/DESIGN_PRINCIPLES.md`](docs/design/DESIGN_PRINCIPLES.md)).
 
-*   **Cozy Dark Aesthetic:** A bespoke warm-neutral terracotta and charcoal color palette that feels like candlelight instead of clinical fluorescent productivity tools.
-*   **The Orb Presence:** Represented by an abstract, organic gradient breathing orb that gently pulses during cognitive tasks and message streaming.
-*   **Visible Memory:** When Maia uses your past conversations or facts to answer, she shows a magical tappable `"remembering..."` indicator, showing you exactly what she drew on.
+*   **Warm Hearth Palette:** Morning Hearth (`#F8F5F0` canvas, `#FFFFFF` `1dp`-hairline cards) and Evening Hearth (`#171310` charcoal) with automatic system theme following.
+*   **Floating Minimalist Chrome:** Unified top bar (`MaiaOrb` + quiet `ON DEVICE` pill + privacy shield), floating pill chat composer, and a suspended floating pill bottom navigation bar (`Talk` · `Remembers`).
+*   **Inspectable Memory:** Switch seamlessly between **List** (with *Keep / Edit / Forget* review actions), **Timeline**, and **Explore** (interactive 2D Mind Map), and tap *"Why do you think that?"* on any fact to see its exact source conversation turn.
 
 ---
 
@@ -84,20 +84,20 @@ Maia utilizes a tri-store RAG (Retrieval-Augmented Generation) memory pipeline t
                      profile facts table
 ```
 
-1.  **Episodic Memory:** An append-only, encrypted SQLite/Room log of all raw exchanges and mental observations.
-2.  **Semantic Memory:** Uses Universal Sentence Encoder (USE) Lite via MediaPipe to generate 512-dimensional L2-normalized embeddings, enabling high-quality cosine similarity search for context retrieval.
-3.  **Profile Memory:** A list of distilled facts (e.g. `Hobby = Guitar`). Pointers are kept to source events. Newer facts gracefully supersede older ones in the Room database, keeping superseded facts as reference.
+1.  **Episodic Memory:** An append-only, encrypted SQLite/Room log (non-destructive versioned migrations, schema v6) of all raw exchanges and observations.
+2.  **Semantic Memory:** Uses Universal Sentence Encoder (USE) Lite via MediaPipe to generate 512-dimensional L2-normalized embeddings, stored as compact little-endian binary `BLOB`s (`VectorCodec`, 2 KB per vector) for fast, low-GC cosine similarity search.
+3.  **Profile Memory:** A list of distilled facts (e.g. `Hobby = Guitar`) with provenance links back to source turns, superseded history tracking, and in-app *Keep / Edit / Forget* curator controls.
 4.  **Distillation Job:** A periodic background WorkManager job (constrained to charging states) that reviews recent conversation logs, extracts structural details, and updates profile facts.
 
 ---
 
 ## 🔒 Security & Privacy
 
-*   **No Network Access:** There is **zero** `INTERNET` permission declared in the manifest (enforced by automated unit tests in `PermissionAuditTest`). Maia physically cannot send your data to any external server.
-*   **SQLCipher Encryption:** The local Room database is encrypted using 256-bit AES SQLCipher (`4.6.1`, 16 KB page-aligned).
-*   **Hardware Keystore:** The encryption passphrase is dynamically generated and wrapped inside the Android Keystore (Hardware TEE / StrongBox).
-*   **Biometric Vault Lock & Encrypted Exports:** Protect the Memory Vault behind `BiometricPrompt` and export password-protected AES-256-GCM `.maiavault` archives.
-*   **Deterministic Crisis Safety:** Built-in deterministic crisis intervention layer surfaces local support lifelines immediately without relying on LLM generation.
+*   **No Network Access:** There is **zero** `INTERNET` permission declared in the manifest (enforced by automated unit tests in [`PermissionAuditTest.kt`](app/src/test/java/com/example/PermissionAuditTest.kt)). Maia physically cannot send your data to any external server.
+*   **SQLCipher Encryption:** The local Room database is encrypted using 256-bit AES SQLCipher (`4.6.1`, 16 KB page-aligned), with zero plaintext PII in `SharedPreferences`.
+*   **Hardware Keystore:** The encryption passphrase is dynamically generated and wrapped inside the Android Keystore (Hardware TEE / StrongBox, verified dynamically via `KeyInfo`), with graceful [`VaultRecoveryScreen`](app/src/main/java/com/example/ui/screens/VaultRecoveryScreen.kt) handling.
+*   **Full-App Biometric Lock & Encrypted Exports:** Optional fingerprint / screen-lock gate (`BiometricPrompt`) that verifies enrollment in Settings and automatically re-locks Maia when backgrounded, plus password-protected AES-256-GCM `.maiavault` archive exports.
+*   **Deterministic Crisis Safety & Offline Reporting:** Built-in deterministic crisis intervention layer surfaces local support lifelines immediately without relying on LLM generation, paired with a zero-network `mailto:` response reporting action.
 
 ---
 
@@ -139,9 +139,11 @@ Because Maia runs entirely on-device, her cognitive brain requires a physical Ge
 2.  Download **`gemma3-1b-it-int4.task`** (~555MB)
 3.  Do **not** use raw `.bin` or `.tflite` weights — MediaPipe needs the bundled tokenizer + `prefill`/`decode` signatures
 
-### Step 2: Transfer to Device App-Specific Directory
+### Step 2: Load the Model (3 Zero-Network Options)
 
-Transfer the model file to your Android phone using ADB:
+1. **Google Play Asset Delivery (`:model_pack`, for Play Store builds):** Drop `gemma3-1b-it-int4.task` and `universal_sentence_encoder.tflite` into `model_pack/src/main/assets/models/` before building `:app:bundleRelease` (see [`model_pack/README.md`](model_pack/README.md)). `BundledModelExtractor` automatically stages them into fast internal storage on first launch.
+2. **In-App File Picker (No ADB Required):** Open **Settings → Active Local Model → Import Model File (`.task`)** to select a `.task` file from your phone via Android's Storage Access Framework.
+3. **ADB Transfer (Developers):**
 
 ```bash
 # Official LiteRT filename (preferred)
@@ -151,7 +153,7 @@ adb push gemma3-1b-it-int4.task /sdcard/Android/data/app.heymaia/files/models/
 # adb push gemma3-1b-it-int4.task /sdcard/Android/data/app.heymaia/files/models/gemma-1b-it-cpu-int4.task
 ```
 
-**Note**: The app looks for `gemma3-1b-it-int4.task` first, then falls back to `gemma-1b-it-cpu-int4.task`.
+**Note**: Maia checks both app-private internal storage (`files/models/`, fastest I/O bypassing FUSE) and external app storage, preferring `gemma3-1b-it-int4.task` with fallback to `gemma-1b-it-cpu-int4.task`.
 
 ### Step 3: Download & Transfer the Embedding Model (Optional but Recommended)
 
