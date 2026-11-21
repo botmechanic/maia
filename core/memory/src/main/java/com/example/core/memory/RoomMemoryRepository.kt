@@ -9,6 +9,7 @@ import com.example.core.database.AppDatabase
 import com.example.core.database.EpisodicMemoryEntity
 import com.example.core.database.ProfileMemoryEntity
 import com.example.core.database.SemanticMemoryEntity
+import com.example.core.database.VectorCodec
 import com.example.core.memory.worker.DistillationWorker
 import com.example.core.memory.worker.RebuildIndexWorker
 import com.example.core.contract.GemmaChatFormatting
@@ -79,10 +80,11 @@ class RoomMemoryRepository(
                         semanticDao.insert(
                             SemanticMemoryEntity(
                                 episodicMemoryId = episodicId,
-                                embeddingString = vector.joinToString(","),
+                                embeddingString = "",
                                 embedderId = embedderId,
                                 dimension = dimension,
-                                moduleId = moduleId
+                                moduleId = moduleId,
+                                embeddingBlob = VectorCodec.encode(vector)
                             )
                         )
                     }
@@ -127,7 +129,7 @@ class RoomMemoryRepository(
                 val allSemantics = semanticDao.getAllByEmbedder(embedderId)
                 val minThreshold = sharedPrefs.getFloat("similarity_threshold", 0.35f)
                 val topMatches = allSemantics.mapNotNull { semantic ->
-                    val vector = semantic.embeddingString.split(",").mapNotNull { it.toFloatOrNull() }.toFloatArray()
+                    val vector = VectorCodec.decodeWithFallback(semantic.embeddingBlob, semantic.embeddingString)
                     if (vector.size == queryVector.size) {
                         Pair(semantic.episodicMemoryId, embeddingService.computeCosineSimilarity(queryVector, vector))
                     } else null

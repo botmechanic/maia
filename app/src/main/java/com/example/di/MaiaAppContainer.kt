@@ -37,7 +37,13 @@ class MaiaAppContainer(private val app: Application) {
     val promptProvider = SystemPromptProvider(app)
     val embeddingService = MediaPipeEmbeddingService(app)
     val modelRuntime = MediaPipeModelRuntime(app)
-    val memoryRepository = RoomMemoryRepository(app, embeddingService)
+
+    private val _vaultInitError = MutableStateFlow<String?>(null)
+    val vaultInitError: StateFlow<String?> = _vaultInitError.asStateFlow()
+
+    val memoryRepository: RoomMemoryRepository by lazy {
+        RoomMemoryRepository(app, embeddingService)
+    }
 
     private val chatModule = ChatModule()
     private val memoryViewModule = MemoryViewModule()
@@ -51,8 +57,8 @@ class MaiaAppContainer(private val app: Application) {
         MutableStateFlow(sharedPrefs.getBoolean("onboarding_completed", false))
     val onboardingCompleted: StateFlow<Boolean> = _onboardingCompleted.asStateFlow()
 
-    private val _userName =
-        MutableStateFlow(sharedPrefs.getString("user_name", "Friend") ?: "Friend")
+    // Kept strictly in memory during onboarding; never persisted in plaintext SharedPreferences.
+    private val _userName = MutableStateFlow("")
     val userName: StateFlow<String> = _userName.asStateFlow()
 
     private val _onboardingStep = MutableStateFlow(1)
@@ -70,12 +76,35 @@ class MaiaAppContainer(private val app: Application) {
     private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     init {
+        // Purge any legacy plaintext user_name key from SharedPreferences
+        if (sharedPrefs.contains("user_name")) {
+            sharedPrefs.edit().remove("user_name").apply()
+        }
         MaiaServices.modelRuntime = modelRuntime
         MaiaServices.embeddingService = embeddingService
-        MaiaServices.memoryRepository = memoryRepository
-        DistillationWorker.schedulePeriodic(app)
+        try {
+            MaiaServices.memoryRepository = memoryRepository
+            DistillationWorker.schedulePeriodic(app)
+        } catch (e: Exception) {
+            Log.e("MaiaAppContainer", "Encrypted vault could not be opened on this device", e)
+            _vaultInitError.value = e.message ?: "Unable to unlock the encrypted vault on this device."
+        }
         appScope.launch {
             embeddingService.initializeEmbedder()
+        }
+    }
+
+    fun resetCorruptedVault() {
+        com.example.core.database.AppDatabase.resetVault(app)
+        sharedPrefs.edit()
+            .putBoolean("onboarding_completed", false)
+            .remove("user_name")
+            .apply()
+        _onboardingCompleted.value = false
+        _onboardingStep.value = 1
+        _vaultInitError.value = null
+        synchronized(Companion) {
+            INSTANCE = null
         }
     }
 
@@ -96,7 +125,7 @@ class MaiaAppContainer(private val app: Application) {
     fun completeOnboarding() {
         sharedPrefs.edit()
             .putBoolean("onboarding_completed", true)
-            .putString("user_name", _userName.value)
+            .remove("user_name")
             .apply()
         _onboardingCompleted.value = true
     }

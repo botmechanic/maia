@@ -7,6 +7,10 @@ android {
     namespace = "com.example.core.database"
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
     api(project(":core:model"))
     implementation(libs.androidx.core.ktx)
@@ -14,4 +18,5 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.sqlcipher)
     ksp(libs.androidx.room.compiler)
+    testImplementation(libs.junit)
 }

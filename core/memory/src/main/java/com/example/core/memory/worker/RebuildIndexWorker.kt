@@ -81,10 +81,11 @@ class RebuildIndexWorker(
                     semanticDao.insert(
                         SemanticMemoryEntity(
                             episodicMemoryId = episodic.id,
-                            embeddingString = vector.joinToString(","),
+                            embeddingString = "",
                             embedderId = embedderId,
                             dimension = dimension,
-                            moduleId = episodic.moduleId
+                            moduleId = episodic.moduleId,
+                            embeddingBlob = com.example.core.database.VectorCodec.encode(vector)
                         )
                     )
                     successCount++

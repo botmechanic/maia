@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.gstatic.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "error-container": "#ffdad6", "outline": "#89726c", "outline-variant": "#dcc0ba", "surface-tint": "#9d4229", "surface-bright": "#fff8f4", "on-background": "#211a12", "on-primary": "#ffffff", "on-primary-fixed": "#3c0800", "primary": "#903820", "surface-container-highest": "#eee0d3", "on-surface": "#211a12", "tertiary-fixed": "#ffddb8", "primary-fixed": "#ffdbd1", "on-error-container": "#93000a", "on-error": "#ffffff", "on-secondary-container": "#5a694e", "on-tertiary": "#ffffff", "error": "#ba1a1a", "secondary-fixed-dim": "#bcccab", "primary-container": "#af4f35", "tertiary-container": "#93621b", "on-tertiary-fixed-variant": "#653e00", "surface": "#fff8f4", "inverse-surface": "#372f26", "on-secondary-fixed": "#131f0a", "inverse-on-surface": "#fdeee1", "tertiary-fixed-dim": "#fabb6c", "on-tertiary-container": "#ffecd9", "on-secondary-fixed-variant": "#3d4b32", "surface-dim": "#e6d8cb", "inverse-primary": "#ffb5a1", "on-secondary": "#ffffff", "secondary": "#556348", "primary-fixed-dim": "#ffb5a1", "surface-container": "#faebde", "on-primary-fixed-variant": "#7e2b14", "tertiary": "#774a00", "surface-container-low": "#fff1e5", "secondary-fixed": "#d8e8c6", "surface-container-lowest": "#ffffff", "on-tertiary-fixed": "#2a1700", "secondary-container": "#d8e8c6", "on-primary-container": "#ffeae5", "background": "#fff8f4", "surface-variant": "#eee0d3", "surface-container-high": "#f4e6d9", "on-surface-variant": "#56423d" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "1.25rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-md": "1rem", "gutter": "1rem" }, fontFamily: { "headline-lg": ["Plus Jakarta Sans"], "numeric-metric": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "caption": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-lg": ["26px", { lineHeight: "34px", letterSpacing: "-0.02em", fontWeight: "600" }], "numeric-metric": ["28px", { lineHeight: "34px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-md": ["20px", { lineHeight: "28px", letterSpacing: "-0.015em", fontWeight: "600" }], "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "500" }], "headline-xl-mobile": ["30px", { lineHeight: "38px", letterSpacing: "-0.025em", fontWeight: "700" }], "headline-xl": ["34px", { lineHeight: "42px", letterSpacing: "-0.03em", fontWeight: "700" }], "caption": ["13px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "500" }], "body-md": ["15px", { lineHeight: "22px", letterSpacing: "-0.005em", fontWeight: "400" }], "body-lg": ["17px", { lineHeight: "26px", letterSpacing: "-0.01em", fontWeight: "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen selection:bg-primary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-16 max-w-[480px] mx-auto px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm flex-1"><button aria-label="Navigate Back" class="w-11 h-11 -ml-2 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back</span></button><h1 class="font-headline-md text-headline-md text-on-surface tracking-tight truncate">Category Detail</h1></div><div class="flex items-center gap-space-xs"><button aria-label="Filter or Search" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">tune</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full max-w-[480px] mx-auto px-margin pt-16 pb-safe bg-surface"><div class="flex flex-col w-full pb-24">
+<!-- Sub-header metadata strip -->
+<div class="flex items-center justify-between pt-2 pb-3">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-caption text-caption text-on-surface-variant font-medium tracking-wide">14 people synthesized</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[13px] text-secondary">lock</span>
+<span class="font-caption text-[11px] tracking-wider font-semibold uppercase">Vault #M-409</span>
+</div>
+</div>
+<!-- Search Input Bar -->
+<div class="relative w-full mb-4">
+<div class="w-full h-12 bg-surface-container-lowest rounded-full shadow-sm flex items-center px-4 gap-space-sm focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant select-none">search</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none" id="people-search" placeholder="Search people or mentions..." type="text"/>
+<button aria-label="Clear Search" class="hidden w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface" id="clear-search">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+<!-- Minimal Stats Ledger Card -->
+<div class="w-full rounded-2xl bg-surface-container-lowest p-4 shadow-sm mb-5">
+<div class="flex items-center justify-between pb-3">
+<span class="font-caption text-caption uppercase tracking-wider text-on-surface-variant font-semibold">Relational Geometry</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">hub</span>
+</div>
+<div class="grid grid-cols-3 gap-2 divide-x divide-surface-container-high/60">
+<div class="flex flex-col pr-1">
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight">42</span>
+<span class="font-caption text-[11px] text-on-surface-variant leading-tight mt-0.5">Memories linked</span>
+</div>
+<div class="flex flex-col px-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight truncate">Jordan</span>
+<span class="font-caption text-[11px] text-on-surface-variant leading-tight mt-0.5">Top · 18 notes</span>
+</div>
+<div class="flex flex-col pl-2">
+<span class="font-headline-md text-headline-md text-secondary font-bold tracking-tight">100%</span>
+<span class="font-caption text-[11px] text-on-surface-variant leading-tight mt-0.5">On-device key</span>
+</div>
+</div>
+</div>
+<!-- Filter Pills (Scrollable Row) -->
+<div class="w-full -mx-margin px-margin overflow-x-auto no-scrollbar mb-4">
+<div class="flex items-center gap-2 min-w-max py-0.5" id="filter-container">
+<button class="filter-pill h-8 px-3.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-medium transition-all shadow-sm flex items-center gap-1.5" data-filter="all">
+<span>All</span>
+<span class="px-1.5 py-0.2 rounded-full bg-on-primary/20 text-[11px] font-semibold">14</span>
+</button>
+<button class="filter-pill h-8 px-3.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md font-medium transition-all hover:text-on-surface flex items-center gap-1.5" data-filter="friends">
+<span>Close friends</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-variant text-[11px] font-semibold">5</span>
+</button>
+<button class="filter-pill h-8 px-3.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md font-medium transition-all hover:text-on-surface flex items-center gap-1.5" data-filter="work">
+<span>Work &amp; Collaborators</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-variant text-[11px] font-semibold">6</span>
+</button>
+<button class="filter-pill h-8 px-3.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md font-medium transition-all hover:text-on-surface flex items-center gap-1.5" data-filter="family">
+<span>Family</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-variant text-[11px] font-semibold">3</span>
+</button>
+</div>
+</div>
+<!-- People List -->
+<div class="flex flex-col gap-3 w-full" id="people-list">
+<!-- Item 1: Jordan Rivera -->
+<div class="person-card w-full rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-all text-left cursor-pointer group active:scale-[0.99]" data-category="work" role="button" tabindex="0">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Monogram (Terracotta) -->
+<div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="font-headline-md text-[16px] font-bold text-primary">JR</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-[17px] text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Jordan Rivera</h2>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-caption text-[11px] font-medium shrink-0">Co-worker / Design Lead</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">18 memories · Last mentioned yesterday</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant/50 group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0 mt-2">chevron_right</span>
+</div>
+<!-- Synthesized snippet -->
+<div class="mt-3 pt-2.5 bg-surface-container-low/60 rounded-xl px-3 py-2 flex items-start gap-2">
+<span class="material-symbols-outlined text-[15px] text-primary shrink-0 mt-0.5">auto_awesome</span>
+<p class="font-body-md text-[13px] leading-relaxed text-on-surface-variant">
+<span class="text-on-surface font-medium">Memory highlight:</span> Presentation next Tuesday, likes concise feedback
+        </p>
+</div>
+</div>
+<!-- Item 2: Maya Chen -->
+<div class="person-card w-full rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-all text-left cursor-pointer group active:scale-[0.99]" data-category="friends" role="button" tabindex="0">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Monogram (Sage Green) -->
+<div class="w-11 h-11 rounded-full bg-secondary/15 flex items-center justify-center shrink-0">
+<span class="font-headline-md text-[16px] font-bold text-secondary">MC</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-[17px] text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Maya Chen</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary font-caption text-[11px] font-medium shrink-0">Friend</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">11 memories · Last mentioned 3 days ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant/50 group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0 mt-2">chevron_right</span>
+</div>
+<!-- Synthesized snippet -->
+<div class="mt-3 pt-2.5 bg-surface-container-low/60 rounded-xl px-3 py-2 flex items-start gap-2">
+<span class="material-symbols-outlined text-[15px] text-secondary shrink-0 mt-0.5">auto_awesome</span>
+<p class="font-body-md text-[13px] leading-relaxed text-on-surface-variant">
+<span class="text-on-surface font-medium">Memory highlight:</span> Running half-marathon in April, lives in Seattle
+        </p>
+</div>
+</div>
+<!-- Item 3: Liam Vance -->
+<div class="person-card w-full rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-all text-left cursor-pointer group active:scale-[0.99]" data-category="work" role="button" tabindex="0">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Monogram (Warm Ochre / Tertiary) -->
+<div class="w-11 h-11 rounded-full bg-tertiary/10 flex items-center justify-center shrink-0">
+<span class="font-headline-md text-[16px] font-bold text-tertiary">LV</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-[17px] text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Liam Vance</h2>
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-caption text-[11px] font-medium shrink-0">Mentor</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">7 memories · Last mentioned Oct 18</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant/50 group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0 mt-2">chevron_right</span>
+</div>
+<!-- Synthesized snippet -->
+<div class="mt-3 pt-2.5 bg-surface-container-low/60 rounded-xl px-3 py-2 flex items-start gap-2">
+<span class="material-symbols-outlined text-[15px] text-tertiary shrink-0 mt-0.5">auto_awesome</span>
+<p class="font-body-md text-[13px] leading-relaxed text-on-surface-variant">
+<span class="text-on-surface font-medium">Memory highlight:</span> Recommended “The Courage to be Disliked”, prefers morning calls
+        </p>
+</div>
+</div>
+<!-- Item 4: Elena Rostova -->
+<div class="person-card w-full rounded-2xl bg-surface-container-lowest p-4 shadow-sm hover:shadow-md transition-all text-left cursor-pointer group active:scale-[0.99]" data-category="work" role="button" tabindex="0">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<!-- Monogram (Terracotta) -->
+<div class="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="font-headline-md text-[16px] font-bold text-primary">ER</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-[17px] text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Elena Rostova</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-caption text-[11px] font-medium shrink-0">Collaborator</span>
+</div>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5">4 memories · Last mentioned Oct 10</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant/50 group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0 mt-2">chevron_right</span>
+</div>
+<!-- Synthesized snippet -->
+<div class="mt-3 pt-2.5 bg-surface-container-low/60 rounded-xl px-3 py-2 flex items-start gap-2">
+<span class="material-symbols-outlined text-[15px] text-primary shrink-0 mt-0.5">auto_awesome</span>
+<p class="font-body-md text-[13px] leading-relaxed text-on-surface-variant">
+<span class="text-on-surface font-medium">Memory highlight:</span> Building local-first sync protocols
+        </p>
+</div>
+</div>
+</div>
+<!-- Quiet Privacy Trust Architecture Note -->
+<div class="w-full rounded-2xl bg-surface-container-high/60 p-4 mt-6">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">verified_user</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md font-semibold text-on-surface">Archival Isolation Guarantee</h3>
+<p class="font-caption text-caption text-on-surface-variant mt-0.5 leading-relaxed">
+          People profiles are synthesized entirely from your private reflections. No address book or contact sync used. Everything stays on this hardware enclave.
+        </p>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive filter toggle logic
+  (function() {
+    const filterButtons = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.person-card');
+    const searchInput = document.getElementById('people-search');
+    const clearButton = document.getElementById('clear-search');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update Pill Visual States
+        filterButtons.forEach(b => {
+          b.className = 'filter-pill h-8 px-3.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md font-medium transition-all hover:text-on-surface flex items-center gap-1.5';
+          const badge = b.querySelector('span:last-child');
+          if (badge) badge.className = 'px-1.5 py-0.2 rounded-full bg-surface-variant text-[11px] font-semibold';
+        });
+
+        btn.className = 'filter-pill h-8 px-3.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-medium transition-all shadow-sm flex items-center gap-1.5';
+        const activeBadge = btn.querySelector('span:last-child');
+        if (activeBadge) activeBadge.className = 'px-1.5 py-0.2 rounded-full bg-on-primary/20 text-[11px] font-semibold';
+
+        // Filter cards
+        cards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Simple search filtering
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        if (term.length > 0) {
+          clearButton.classList.remove('hidden');
+        } else {
+          clearButton.classList.add('hidden');
+        }
+
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (text.includes(term)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+
+      clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        clearButton.classList.add('hidden');
+        cards.forEach(card => card.style.display = 'block');
+        searchInput.focus();
+      });
+    }
+  })();
+</script></main></body></html>

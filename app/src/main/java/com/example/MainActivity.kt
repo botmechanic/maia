@@ -47,6 +47,7 @@ import com.example.feature.settings.SettingsScreen
 import com.example.feature.settings.SettingsViewModel
 import androidx.fragment.app.FragmentActivity
 import com.example.ui.screens.OnboardingScreen
+import com.example.ui.screens.VaultRecoveryScreen
 
 class MainActivity : FragmentActivity() {
 
@@ -65,9 +66,18 @@ class MainActivity : FragmentActivity() {
                 else -> isSystemDark
             }
             val onboardingCompleted by shellViewModel.onboardingCompleted.collectAsState()
+            val vaultInitError by container.vaultInitError.collectAsState()
 
             MyApplicationTheme(darkTheme = isDark) {
-                if (!onboardingCompleted) {
+                if (vaultInitError != null) {
+                    VaultRecoveryScreen(
+                        errorMessage = vaultInitError ?: "Vault key unavailable.",
+                        onResetVault = {
+                            container.resetCorruptedVault()
+                            recreate()
+                        }
+                    )
+                } else if (!onboardingCompleted) {
                     OnboardingScreen(viewModel = shellViewModel)
                 } else {
                     var currentTab by rememberSaveable { mutableStateOf("chat") }

@@ -17,11 +17,12 @@ data class EpisodicMemoryEntity(
 data class SemanticMemoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val episodicMemoryId: Long,
-    val embeddingString: String,
+    val embeddingString: String = "",
     val timestamp: Long = System.currentTimeMillis(),
     val embedderId: String,
     val dimension: Int,
-    val moduleId: String = "chat"
+    val moduleId: String = "chat",
+    val embeddingBlob: ByteArray? = null
 )
 
 @Entity(tableName = "profile_memories")
