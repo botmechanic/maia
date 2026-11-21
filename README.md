@@ -17,12 +17,9 @@
 
 Maia is a warm, protective, mother-archetype personal AI companion app for Android. Designed to stay entirely offline, she chats with you, remembers your life, and guarantees that your data never leaves your phone.
 
-<p align="center">
-  <img src="docs/images/screenshots/01_talk.png" alt="Maia Talk Screen" width="210" />
-  <img src="docs/images/screenshots/02_remembers.png" alt="Maia Remembers Vault" width="210" />
-  <img src="docs/images/screenshots/03_mindmap.png" alt="Maia Memory Mind Map" width="210" />
-  <img src="docs/images/screenshots/04_privacy_settings.png" alt="Maia Privacy Audit" width="210" />
-</p>
+| Talk · On-Device | What I Know | Mind Map | 0 Bytes Sent |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/images/screenshots/01_talk.png" alt="Maia Talk Screen" width="210" /> | <img src="docs/images/screenshots/02_remembers.png" alt="Maia Remembers Vault" width="210" /> | <img src="docs/images/screenshots/03_mindmap.png" alt="Maia Memory Mind Map" width="210" /> | <img src="docs/images/screenshots/04_privacy_settings.png" alt="Maia Privacy Audit" width="210" /> |
 
 ---
 
@@ -192,6 +189,7 @@ Start the app. Maia will automatically scan your app-specific `models` directory
 
 - **[Product Requirements Document (PRD.md)](PRD.md):** Complete product specifications, architecture overview, performance SLAs, and roadmap.
 - **[On-Device AI Engineering Handbook (EDGE_AI_ENGINEERING_GUIDE.md)](EDGE_AI_ENGINEERING_GUIDE.md):** Deep technical documentation on on-device SLM runtime engineering, INT4 quantization, token budgeting, KV cache management, Tri-Store RAG, vector dot-product similarity, battery-aware WorkManager distillation, and hardware Keystore envelope encryption.
+- **[Play Store Submission Checklist (docs/PLAY_STORE_SUBMISSION_CHECKLIST.md)](docs/PLAY_STORE_SUBMISSION_CHECKLIST.md):** Release signing, Play Asset Delivery (`:model_pack`), Data Safety answers, and Closed Testing submission steps.
 
 ---
 
