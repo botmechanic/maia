@@ -112,27 +112,25 @@ fun MemoryScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Icon(
-                imageVector = Icons.Default.Lock,
-                contentDescription = "Vault Locked",
-                tint = MaiaTheme.colors.maiaPresence,
-                modifier = Modifier.size(64.dp)
-            )
-            Spacer(modifier = Modifier.height(20.dp))
+            // Minimalist Lock Screen
+            com.example.core.design.components.MaiaOrb(size = 64.dp)
+            Spacer(modifier = Modifier.height(24.dp))
             Text(
-                text = "Memory Vault Locked",
-                style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
-                fontWeight = FontWeight.Bold,
+                text = "Vault Locked",
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = (-0.4).sp
+                ),
                 color = MaiaTheme.colors.ink
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Biometric authentication is required to access your confidential personal facts and conversation timeline.",
+                text = "Unlock with biometrics to view your memories.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaiaTheme.colors.inkMuted,
                 textAlign = TextAlign.Center,
-                lineHeight = 20.sp,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                modifier = Modifier.padding(horizontal = 24.dp)
             )
             Spacer(modifier = Modifier.height(28.dp))
             Button(
@@ -160,18 +158,18 @@ fun MemoryScreen(
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaiaTheme.colors.maiaPresence,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
+                    contentColor = Color.White
                 ),
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(999.dp),
                 modifier = Modifier
                     .fillMaxWidth(0.7f)
-                    .height(48.dp)
+                    .height(50.dp)
                     .testTag("unlock_vault_button")
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(imageVector = Icons.Default.Fingerprint, contentDescription = null, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Unlock Vault", fontWeight = FontWeight.Bold)
+                    Text("Unlock Vault", fontWeight = FontWeight.SemiBold)
                 }
             }
         }
@@ -260,35 +258,31 @@ fun MemoryScreen(
             .background(MaiaTheme.colors.canvas)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Header Section
+            // Unified Minimalist Top Bar
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 16.dp),
+                    .padding(horizontal = 20.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.Memory,
-                        contentDescription = null,
-                        tint = MaiaTheme.colors.maiaPresence,
-                        modifier = Modifier.size(32.dp)
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.clickable { onOpenSettings() }
+                ) {
+                    com.example.core.design.components.MaiaOrb(size = 28.dp)
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = "Maia",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 19.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = (-0.3).sp
+                        ),
+                        color = MaiaTheme.colors.ink
                     )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column {
-                        Text(
-                            text = "Remembers",
-                            style = MaterialTheme.typography.titleLarge.copy(fontSize = 24.sp),
-                            fontWeight = FontWeight.Bold,
-                            color = MaiaTheme.colors.ink
-                        )
-                        Text(
-                            text = "Encrypted Vault & Timeline",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaiaTheme.colors.inkMuted
-                        )
-                    }
+                    Spacer(modifier = Modifier.width(10.dp))
+                    com.example.core.design.components.MaiaOnDevicePill(label = "ON DEVICE")
                 }
 
                 IconButton(
@@ -301,51 +295,87 @@ fun MemoryScreen(
                         imageVector = Icons.Default.Security,
                         contentDescription = "Privacy & Settings",
                         tint = MaiaTheme.colors.inkMuted,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(19.dp)
                     )
                 }
             }
 
-            // 3-Way Segmented Mode Switcher (List | Timeline | Explore)
-            Row(
+            // Editorial Title + Quiet Count
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp)
-                    .background(MaiaTheme.colors.surface, RoundedCornerShape(12.dp))
-                    .padding(4.dp),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    .padding(horizontal = 20.dp)
+                    .padding(top = 4.dp, bottom = 14.dp)
             ) {
-                listOf(
-                    Triple("list", "List", Icons.AutoMirrored.Filled.List),
-                    Triple("timeline", "Timeline", Icons.Default.History),
-                    Triple("mindmap", "Explore", Icons.Default.AccountTree)
-                ).forEach { (mode, label, icon) ->
-                    val isSelected = memoryViewMode == mode
-                    Surface(
-                        onClick = { memoryViewMode = mode },
-                        shape = RoundedCornerShape(8.dp),
-                        color = if (isSelected) MaiaTheme.colors.maiaPresence else Color.Transparent,
-                        modifier = Modifier
-                            .weight(1f)
-                            .testTag(if (mode == "mindmap") "toggle_mind_map_button" else "mode_tab_$mode")
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(vertical = 8.dp),
-                            horizontalArrangement = Arrangement.Center,
-                            verticalAlignment = Alignment.CenterVertically
+                Text(
+                    text = "What I know",
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = (-0.6).sp
+                    ),
+                    color = MaiaTheme.colors.ink
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "${activeFacts.size} memories · Encrypted on this phone",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
+                    color = MaiaTheme.colors.inkMuted
+                )
+            }
+
+            // Apple-Style Pill Segmented Control (List | Timeline | Explore)
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .height(38.dp),
+                shape = RoundedCornerShape(999.dp),
+                color = MaiaTheme.colors.userBubble,
+                tonalElevation = 0.dp
+            ) {
+                Row(
+                    modifier = Modifier.padding(3.dp),
+                    horizontalArrangement = Arrangement.spacedBy(3.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    listOf(
+                        Triple("list", "List", Icons.AutoMirrored.Filled.List),
+                        Triple("timeline", "Timeline", Icons.Default.History),
+                        Triple("mindmap", "Explore", Icons.Default.AccountTree)
+                    ).forEach { (mode, label, icon) ->
+                        val isSelected = memoryViewMode == mode
+                        Surface(
+                            onClick = { memoryViewMode = mode },
+                            shape = RoundedCornerShape(999.dp),
+                            color = if (isSelected) MaiaTheme.colors.surface else Color.Transparent,
+                            border = if (isSelected) androidx.compose.foundation.BorderStroke(1.dp, MaiaTheme.colors.hairline) else null,
+                            shadowElevation = 0.dp,
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(32.dp)
+                                .testTag(if (mode == "mindmap") "toggle_mind_map_button" else "mode_tab_$mode")
                         ) {
-                            Icon(
-                                imageVector = icon,
-                                contentDescription = null,
-                                tint = if (isSelected) Color.White else MaiaTheme.colors.inkMuted,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text(
-                                text = label,
-                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                color = if (isSelected) Color.White else MaiaTheme.colors.inkMuted
-                            )
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = icon,
+                                    contentDescription = null,
+                                    tint = if (isSelected) MaiaTheme.colors.ink else MaiaTheme.colors.inkMuted,
+                                    modifier = Modifier.size(15.dp)
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = label,
+                                    style = MaterialTheme.typography.labelMedium.copy(
+                                        fontSize = 13.sp,
+                                        fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Medium
+                                    ),
+                                    color = if (isSelected) MaiaTheme.colors.ink else MaiaTheme.colors.inkMuted
+                                )
+                            }
                         }
                     }
                 }

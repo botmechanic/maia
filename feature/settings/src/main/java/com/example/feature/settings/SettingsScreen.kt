@@ -52,6 +52,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -447,43 +448,88 @@ fun SettingsScreen(
 
                     Spacer(modifier = Modifier.height(14.dp))
 
-                    // Live Security & Privacy Audit Metrics
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(MaiaTheme.colors.surface, RoundedCornerShape(12.dp))
-                            .padding(12.dp)
+                    // Minimalist Privacy Attestation Summary (Apple-like quiet precision)
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(20.dp),
+                        color = MaiaTheme.colors.surface,
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaiaTheme.colors.hairline),
+                        shadowElevation = 0.dp
                     ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Database Storage", style = MaterialTheme.typography.labelSmall, color = MaiaTheme.colors.inkMuted)
-                            Text("${viewModel.getEncryptedDatabaseSizeBytes() / 1024} KB (SQLCipher)", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = MaiaTheme.colors.ink)
-                        }
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Keystore Status", style = MaterialTheme.typography.labelSmall, color = MaiaTheme.colors.inkMuted)
-                            Text(viewModel.getKeySecurityLevelDescription(), style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = MaiaTheme.colors.maiaPresence)
-                        }
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Network Activity", style = MaterialTheme.typography.labelSmall, color = MaiaTheme.colors.inkMuted)
-                            Text("0.00 KB (Zero Internet)", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = MaiaTheme.colors.ink)
-                        }
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Telemetry SDKs", style = MaterialTheme.typography.labelSmall, color = MaiaTheme.colors.inkMuted)
-                            Text("0 Installed (None)", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold, color = MaiaTheme.colors.ink)
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.Bottom
+                            ) {
+                                Column {
+                                    Text(
+                                        text = "0 bytes sent",
+                                        style = MaterialTheme.typography.headlineSmall.copy(
+                                            fontSize = 24.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            letterSpacing = (-0.5).sp
+                                        ),
+                                        color = MaiaTheme.colors.ink
+                                    )
+                                    Text(
+                                        text = "Zero internet permission in binary",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaiaTheme.colors.inkMuted
+                                    )
+                                }
+                                Surface(
+                                    shape = RoundedCornerShape(999.dp),
+                                    color = MaiaTheme.colors.success.copy(alpha = 0.12f)
+                                ) {
+                                    Text(
+                                        text = "Verified",
+                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
+                                        color = MaiaTheme.colors.success,
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+                            HorizontalDivider(color = MaiaTheme.colors.hairline)
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text("Encrypted vault", style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
+                                Text(
+                                    "${viewModel.getEncryptedDatabaseSizeBytes() / 1024} KB · AES-256",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                                    color = MaiaTheme.colors.ink
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text("Key protection", style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
+                                Text(
+                                    viewModel.getKeySecurityLevelDescription(),
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                                    color = MaiaTheme.colors.success
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text("Trackers & SDKs", style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
+                                Text(
+                                    "0 installed",
+                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                                    color = MaiaTheme.colors.ink
+                                )
+                            }
                         }
                     }
 
