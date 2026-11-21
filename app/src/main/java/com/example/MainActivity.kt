@@ -16,16 +16,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChatBubble
-import androidx.compose.material.icons.filled.Memory
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,9 +26,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.core.design.components.MaiaFloatingNavBar
+import com.example.core.design.components.MaiaNavDestination
 import com.example.core.design.theme.MaiaTheme
 import com.example.core.design.theme.MyApplicationTheme
 import com.example.di.MaiaAppContainer
@@ -98,46 +91,26 @@ class MainActivity : FragmentActivity() {
                         contentColor = maiaColors.ink,
                         bottomBar = {
                             if (currentTab != "settings") {
-                                NavigationBar(
-                                    modifier = Modifier
-                                        .navigationBarsPadding()
-                                        .testTag("main_bottom_nav"),
-                                    containerColor = maiaColors.surface,
-                                    tonalElevation = 0.dp
-                                ) {
-                                    NavigationBarItem(
-                                        selected = currentTab == "chat",
-                                        onClick = { currentTab = "chat" },
-                                        icon = {
-                                            Icon(Icons.Default.ChatBubble, contentDescription = "Talk with Maia")
-                                        },
-                                        label = { Text("Talk", style = MaterialTheme.typography.bodySmall) },
-                                        modifier = Modifier.testTag("nav_tab_chat"),
-                                        colors = NavigationBarItemDefaults.colors(
-                                            selectedIconColor = maiaColors.maiaPresence,
-                                            selectedTextColor = maiaColors.maiaPresence,
-                                            unselectedIconColor = maiaColors.inkMuted,
-                                            unselectedTextColor = maiaColors.inkMuted,
-                                            indicatorColor = maiaColors.maiaPresence.copy(alpha = 0.15f)
+                                MaiaFloatingNavBar(
+                                    destinations = listOf(
+                                        MaiaNavDestination(
+                                            id = "chat",
+                                            label = "Talk",
+                                            icon = androidx.compose.material.icons.Icons.Outlined.ChatBubbleOutline,
+                                            contentDescription = "Talk with Maia",
+                                            testTag = "nav_tab_chat"
+                                        ),
+                                        MaiaNavDestination(
+                                            id = "memory",
+                                            label = "Remembers",
+                                            icon = androidx.compose.material.icons.Icons.Outlined.AutoAwesome,
+                                            contentDescription = "What Maia Remembers",
+                                            testTag = "nav_tab_memory"
                                         )
-                                    )
-                                    NavigationBarItem(
-                                        selected = currentTab == "memory",
-                                        onClick = { currentTab = "memory" },
-                                        icon = {
-                                            Icon(Icons.Default.Memory, contentDescription = "What Maia Remembers")
-                                        },
-                                        label = { Text("Remembers", style = MaterialTheme.typography.bodySmall) },
-                                        modifier = Modifier.testTag("nav_tab_memory"),
-                                        colors = NavigationBarItemDefaults.colors(
-                                            selectedIconColor = maiaColors.maiaPresence,
-                                            selectedTextColor = maiaColors.maiaPresence,
-                                            unselectedIconColor = maiaColors.inkMuted,
-                                            unselectedTextColor = maiaColors.inkMuted,
-                                            indicatorColor = maiaColors.maiaPresence.copy(alpha = 0.15f)
-                                        )
-                                    )
-                                }
+                                    ),
+                                    selectedId = currentTab,
+                                    onSelect = { currentTab = it }
+                                )
                             }
                         }
                     ) { innerPadding ->

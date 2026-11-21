@@ -50,6 +50,7 @@ import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.AddComment
+import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Memory
@@ -362,89 +363,107 @@ fun ChatScreen(
                 }
             }
 
-            // 3. User Message Input Area
-            Row(
+            // 3. Minimalist Floating Pill Chat Input Bar
+            Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaiaTheme.colors.surface)
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .padding(bottom = 8.dp), // extra safety inset
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(horizontal = 20.dp, vertical = 10.dp),
+                shape = RoundedCornerShape(999.dp),
+                color = MaiaTheme.colors.surface,
+                border = BorderStroke(1.dp, MaiaTheme.colors.hairline),
+                shadowElevation = 4.dp,
+                tonalElevation = 0.dp
             ) {
-                // Offline Speech-to-Text Mic Button
-                IconButton(
-                    onClick = { launchVoiceRecognition() },
+                Row(
                     modifier = Modifier
-                        .size(44.dp)
-                        .testTag("voice_input_button"),
-                    enabled = !isModelMissing && !isModelLoading
+                        .fillMaxWidth()
+                        .padding(start = 6.dp, end = 6.dp, top = 4.dp, bottom = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Mic,
-                        contentDescription = "Voice Input",
-                        tint = if (!isModelMissing && !isModelLoading) MaiaTheme.colors.maiaPresence
-                               else MaiaTheme.colors.inkMuted.copy(alpha = 0.4f),
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
+                    // Offline Speech-to-Text Mic Button
+                    IconButton(
+                        onClick = { launchVoiceRecognition() },
+                        modifier = Modifier
+                            .size(40.dp)
+                            .testTag("voice_input_button"),
+                        enabled = !isModelMissing && !isModelLoading
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Mic,
+                            contentDescription = "Voice Input",
+                            tint = if (!isModelMissing && !isModelLoading) MaiaTheme.colors.inkMuted
+                                   else MaiaTheme.colors.inkMuted.copy(alpha = 0.35f),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
 
-                Spacer(modifier = Modifier.width(6.dp))
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 4.dp, vertical = 10.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        if (inputText.isEmpty()) {
+                            Text(
+                                text = if (isModelMissing) "Model required to chat…" else "Talk to Maia…",
+                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 15.sp),
+                                color = MaiaTheme.colors.inkMuted.copy(alpha = 0.65f)
+                            )
+                        }
+                        androidx.compose.foundation.text.BasicTextField(
+                            value = inputText,
+                            onValueChange = { inputText = it },
+                            enabled = !isModelMissing && !isModelLoading,
+                            textStyle = MaterialTheme.typography.bodyLarge.copy(
+                                fontSize = 15.sp,
+                                color = MaiaTheme.colors.ink
+                            ),
+                            cursorBrush = androidx.compose.ui.graphics.SolidColor(MaiaTheme.colors.maiaPresence),
+                            maxLines = 4,
+                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
+                            keyboardActions = KeyboardActions(
+                                onSend = {
+                                    if (inputText.isNotBlank() && !isModelMissing && !isModelLoading) {
+                                        viewModel.sendMessage(inputText)
+                                        inputText = ""
+                                        keyboardController?.hide()
+                                    }
+                                }
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("chat_input_field")
+                        )
+                    }
 
-                OutlinedTextField(
-                    value = inputText,
-                    onValueChange = { inputText = it },
-                    placeholder = { Text(if (isModelMissing) "Cannot chat: Model missing" else "Share with Maia...", color = MaiaTheme.colors.inkMuted.copy(alpha = 0.7f)) },
-                    modifier = Modifier
-                        .weight(1f)
-                        .testTag("chat_input_field"),
-                    enabled = !isModelMissing && !isModelLoading,
-                    keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Send
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onSend = {
-                            if (inputText.isNotBlank() && !isModelMissing && !isModelLoading) {
+                    Spacer(modifier = Modifier.width(6.dp))
+
+                    val canSend = inputText.isNotBlank() && !isModelLoading && !isModelMissing
+                    IconButton(
+                        onClick = {
+                            if (canSend) {
                                 viewModel.sendMessage(inputText)
                                 inputText = ""
                                 keyboardController?.hide()
                             }
-                        }
-                    ),
-                    maxLines = 4,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = MaiaTheme.colors.maiaPresence,
-                        unfocusedBorderColor = MaiaTheme.colors.inkMuted.copy(alpha = 0.3f),
-                        cursorColor = MaiaTheme.colors.maiaPresence
-                    ),
-                    shape = RoundedCornerShape(24.dp)
-                )
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                IconButton(
-                    onClick = {
-                        if (inputText.isNotBlank() && !isModelMissing && !isModelLoading) {
-                            viewModel.sendMessage(inputText)
-                            inputText = ""
-                            keyboardController?.hide()
-                        }
-                    },
-                    modifier = Modifier
-                        .size(48.dp)
-                        .background(
-                            if (isModelMissing || isModelLoading) MaiaTheme.colors.maiaPresence.copy(alpha = 0.4f)
-                            else MaiaTheme.colors.maiaPresence, 
-                            CircleShape
+                        },
+                        modifier = Modifier
+                            .size(38.dp)
+                            .background(
+                                if (canSend) MaiaTheme.colors.maiaPresence
+                                else MaiaTheme.colors.maiaPresence.copy(alpha = 0.35f),
+                                CircleShape
+                            )
+                            .testTag("chat_send_button"),
+                        enabled = canSend
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowUpward,
+                            contentDescription = "Send Message",
+                            tint = Color.White,
+                            modifier = Modifier.size(18.dp)
                         )
-                        .testTag("chat_send_button"),
-                    enabled = inputText.isNotBlank() && !isModelLoading && !isModelMissing
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.Send,
-                        contentDescription = "Send Message",
-                        tint = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    }
                 }
             }
         }
@@ -473,86 +492,63 @@ fun MaiaHeaderPresence(
     
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        color = MaiaTheme.colors.surface,
+        color = MaiaTheme.colors.canvas,
         tonalElevation = 0.dp
     ) {
         Column {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 24.dp, vertical = 14.dp),
+                    .padding(horizontal = 20.dp, vertical = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Left side: Brand Mark + Title
+                // Left side: Radiant Orb + "Maia" + Quiet ON DEVICE pill
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.clickable { onOpenSettings() }
                 ) {
-                    // Capture colors for use in drawBehind and background
-                    val headerTerracotta = MaiaTheme.colors.maiaPresence
-                    val headerMuted = MaiaTheme.colors.inkMuted
+                    com.example.core.design.components.MaiaOrb(
+                        size = 28.dp,
+                        isActive = isThinking || isModelLoading,
+                        isDisabled = isModelMissing,
+                        pulseScale = pulseScale,
+                        glowAlpha = glowAlpha
+                    )
 
-                    Box(
-                        modifier = Modifier
-                            .size(36.dp)
-                            .drawBehind {
-                                if ((isThinking || isModelLoading) && !isModelMissing) {
-                                    drawCircle(
-                                        brush = Brush.radialGradient(
-                                            colors = listOf(
-                                                headerTerracotta.copy(alpha = glowAlpha),
-                                                Color.Transparent
-                                            )
-                                        ),
-                                        radius = size.width * pulseScale
-                                    )
-                                }
-                            }
-                            .background(
-                                if (isModelMissing) headerMuted.copy(alpha = 0.4f)
-                                else headerTerracotta,
-                                CircleShape
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "M",
-                            color = Color.White,
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                letterSpacing = (-0.5).sp
-                            )
-                        )
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    Text(
+                        text = "Maia",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 19.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = (-0.3).sp
+                        ),
+                        color = MaiaTheme.colors.ink
+                    )
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+                    val pillLabel = when {
+                        isModelLoading -> "WAKING UP"
+                        isThinking -> "THINKING"
+                        isModelMissing -> "OFFLINE"
+                        showTelemetry && lastMetrics != null && lastMetrics.tokensPerSecond > 0f ->
+                            String.format(Locale.US, "%.1f TOK/S", lastMetrics.tokensPerSecond)
+                        else -> "ON DEVICE"
                     }
-
-                    Spacer(modifier = Modifier.width(12.dp))
-
-                    Column {
-                        Text(
-                            text = "Maia",
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = MaiaTheme.colors.ink
-                        )
-                        
-                        Text(
-                            text = when {
-                                isModelLoading -> "Just waking up…"
-                                isThinking -> "Maia is breathing..."
-                                isModelMissing -> "Offline Fallback Mode"
-                                else -> "She's safe. She's here."
-                            },
-                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                            color = if (isModelLoading || isThinking) MaiaTheme.colors.maiaPresence 
-                                    else MaiaTheme.colors.inkMuted
-                        )
-                    }
+                    com.example.core.design.components.MaiaOnDevicePill(
+                        label = pillLabel,
+                        isHighlighted = isThinking || isModelLoading || (showTelemetry && lastMetrics != null)
+                    )
                 }
 
-                // Right side: On-Device status & Model Name
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                // Right side: Minimalist voice, new chat, and privacy shield icons
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
                     IconButton(
                         onClick = {
                             if (isSpeaking) onStopSpeaking() else onToggleAutoSpeak()
@@ -593,28 +589,7 @@ fun MaiaHeaderPresence(
                             imageVector = Icons.Default.Security,
                             contentDescription = "Privacy & Settings",
                             tint = MaiaTheme.colors.inkMuted,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    }
-                    Column(horizontalAlignment = Alignment.End) {
-                        Text(
-                            text = if (showTelemetry && lastMetrics != null && lastMetrics.tokensPerSecond > 0f) {
-                                String.format(Locale.US, "%.1f TOK/S • %dMS", lastMetrics.tokensPerSecond, lastMetrics.timeToFirstTokenMs)
-                            } else "ON-DEVICE",
-                            style = MaterialTheme.typography.labelSmall.copy(
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Bold,
-                                letterSpacing = 1.sp
-                            ),
-                            color = if (showTelemetry && lastMetrics != null) MaiaTheme.colors.maiaPresence else MaiaTheme.colors.inkMuted.copy(alpha = 0.6f)
-                        )
-                        Text(
-                            text = selectedModel,
-                            style = MaterialTheme.typography.bodySmall.copy(
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Medium
-                            ),
-                            color = MaiaTheme.colors.inkMuted
+                            modifier = Modifier.size(19.dp)
                         )
                     }
                     if (isModelMissing) {
