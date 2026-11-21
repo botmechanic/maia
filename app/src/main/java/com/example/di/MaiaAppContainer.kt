@@ -72,10 +72,22 @@ class MaiaAppContainer(private val app: Application) {
         MutableStateFlow(sharedPrefs.getString("theme_mode", "system") ?: "system")
     val themeMode: StateFlow<String> = _themeMode.asStateFlow()
 
+    private val _biometricLockEnabled =
+        MutableStateFlow(sharedPrefs.getBoolean("biometric_lock_enabled", false))
+    val biometricLockEnabled: StateFlow<Boolean> = _biometricLockEnabled.asStateFlow()
+
+    private val prefsListener =
+        android.content.SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
+            if (key == "biometric_lock_enabled") {
+                _biometricLockEnabled.value = prefs.getBoolean("biometric_lock_enabled", false)
+            }
+        }
+
     private var chatViewModelRef: java.lang.ref.WeakReference<ChatViewModel>? = null
     private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     init {
+        sharedPrefs.registerOnSharedPreferenceChangeListener(prefsListener)
         // Purge any legacy plaintext user_name key from SharedPreferences
         if (sharedPrefs.contains("user_name")) {
             sharedPrefs.edit().remove("user_name").apply()

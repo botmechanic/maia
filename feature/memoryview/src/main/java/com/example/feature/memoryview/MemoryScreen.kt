@@ -98,9 +98,9 @@ fun MemoryScreen(
     onOpenSettings: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val sharedPrefs = remember { context.getSharedPreferences("maia_settings", Context.MODE_PRIVATE) }
+    val sharedPrefs = remember { context.getSharedPreferences("maia_prefs", Context.MODE_PRIVATE) }
     val isBiometricEnabled = remember { sharedPrefs.getBoolean("biometric_lock_enabled", false) }
-    var isVaultUnlocked by rememberSaveable { mutableStateOf(!isBiometricEnabled) }
+    var isVaultUnlocked by rememberSaveable { mutableStateOf(true) }
 
     // If Biometric Vault Lock is enabled and vault is locked, render Lock Screen
     if (isBiometricEnabled && !isVaultUnlocked) {

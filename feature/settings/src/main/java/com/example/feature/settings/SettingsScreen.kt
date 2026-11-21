@@ -406,10 +406,59 @@ fun SettingsScreen(
 
             SettingsToggleRow(
                 icon = Icons.Default.Lock,
-                title = "Biometric Vault Lock",
-                subtitle = "Require fingerprint, face unlock, or device PIN to access your memory vault.",
+                title = "Biometric App & Vault Lock",
+                subtitle = "Require fingerprint or screen lock when opening Maia.",
                 checked = biometricLockEnabled,
-                onCheckedChange = { viewModel.toggleBiometricLock(it) },
+                onCheckedChange = { enable ->
+                    if (!enable) {
+                        viewModel.toggleBiometricLock(false)
+                    } else {
+                        val bm = androidx.biometric.BiometricManager.from(context)
+                        val authenticators = androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG or
+                            androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                        if (bm.canAuthenticate(authenticators) != androidx.biometric.BiometricManager.BIOMETRIC_SUCCESS) {
+                            Toast.makeText(
+                                context,
+                                "Set up a fingerprint or screen lock in Android Settings first.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            var ctx: android.content.Context? = context
+                            while (ctx is android.content.ContextWrapper && ctx !is androidx.fragment.app.FragmentActivity) {
+                                ctx = ctx.baseContext
+                            }
+                            val activity = ctx as? androidx.fragment.app.FragmentActivity
+                            if (activity != null) {
+                                val executor = androidx.core.content.ContextCompat.getMainExecutor(activity)
+                                val prompt = androidx.biometric.BiometricPrompt(
+                                    activity,
+                                    executor,
+                                    object : androidx.biometric.BiometricPrompt.AuthenticationCallback() {
+                                        override fun onAuthenticationSucceeded(result: androidx.biometric.BiometricPrompt.AuthenticationResult) {
+                                            viewModel.toggleBiometricLock(true)
+                                            Toast.makeText(context, "Biometric lock enabled", Toast.LENGTH_SHORT).show()
+                                        }
+                                        override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                                            if (errorCode != androidx.biometric.BiometricPrompt.ERROR_USER_CANCELED &&
+                                                errorCode != androidx.biometric.BiometricPrompt.ERROR_NEGATIVE_BUTTON
+                                            ) {
+                                                Toast.makeText(context, errString.toString(), Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                    }
+                                )
+                                val info = androidx.biometric.BiometricPrompt.PromptInfo.Builder()
+                                    .setTitle("Enable Biometric Lock")
+                                    .setSubtitle("Verify your fingerprint or screen lock to protect Maia")
+                                    .setAllowedAuthenticators(authenticators)
+                                    .build()
+                                prompt.authenticate(info)
+                            } else {
+                                viewModel.toggleBiometricLock(true)
+                            }
+                        }
+                    }
+                },
                 tag = "biometric_lock_switch"
             )
 

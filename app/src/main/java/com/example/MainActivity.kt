@@ -39,6 +39,11 @@ import com.example.feature.memoryview.MemoryViewModel
 import com.example.feature.settings.SettingsScreen
 import com.example.feature.settings.SettingsViewModel
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import com.example.ui.screens.AppLockScreen
 import com.example.ui.screens.OnboardingScreen
 import com.example.ui.screens.VaultRecoveryScreen
 
@@ -60,6 +65,20 @@ class MainActivity : FragmentActivity() {
             }
             val onboardingCompleted by shellViewModel.onboardingCompleted.collectAsState()
             val vaultInitError by container.vaultInitError.collectAsState()
+            val biometricLockEnabled by container.biometricLockEnabled.collectAsState()
+            var isAppUnlocked by rememberSaveable { mutableStateOf(!biometricLockEnabled) }
+
+            // Re-lock automatically whenever Maia goes to the background
+            val lifecycleOwner = LocalLifecycleOwner.current
+            DisposableEffect(lifecycleOwner, biometricLockEnabled) {
+                val observer = LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_STOP && biometricLockEnabled) {
+                        isAppUnlocked = false
+                    }
+                }
+                lifecycleOwner.lifecycle.addObserver(observer)
+                onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+            }
 
             MyApplicationTheme(darkTheme = isDark) {
                 if (vaultInitError != null) {
@@ -69,6 +88,10 @@ class MainActivity : FragmentActivity() {
                             container.resetCorruptedVault()
                             recreate()
                         }
+                    )
+                } else if (onboardingCompleted && biometricLockEnabled && !isAppUnlocked) {
+                    AppLockScreen(
+                        onUnlocked = { isAppUnlocked = true }
                     )
                 } else if (!onboardingCompleted) {
                     OnboardingScreen(viewModel = shellViewModel)
