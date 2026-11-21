@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -187,6 +188,7 @@ fun ChatScreen(
         modifier = modifier
             .fillMaxSize()
             .background(MaiaTheme.colors.canvas)
+            .imePadding()
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             
@@ -397,44 +399,47 @@ fun ChatScreen(
                         )
                     }
 
-                    Box(
+                    androidx.compose.foundation.text.BasicTextField(
+                        value = inputText,
+                        onValueChange = { inputText = it },
+                        enabled = !isModelMissing && !isModelLoading,
+                        textStyle = MaterialTheme.typography.bodyLarge.copy(
+                            fontSize = 15.sp,
+                            color = MaiaTheme.colors.ink
+                        ),
+                        cursorBrush = androidx.compose.ui.graphics.SolidColor(MaiaTheme.colors.maiaPresence),
+                        maxLines = 4,
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
+                        keyboardActions = KeyboardActions(
+                            onSend = {
+                                if (inputText.isNotBlank() && !isModelMissing && !isModelLoading) {
+                                    viewModel.sendMessage(inputText)
+                                    inputText = ""
+                                    keyboardController?.hide()
+                                }
+                            }
+                        ),
+                        decorationBox = { innerTextField ->
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 4.dp, vertical = 12.dp),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                if (inputText.isEmpty()) {
+                                    Text(
+                                        text = if (isModelMissing) "Model required to chat…" else "Talk to Maia…",
+                                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 15.sp),
+                                        color = MaiaTheme.colors.inkMuted.copy(alpha = 0.65f)
+                                    )
+                                }
+                                innerTextField()
+                            }
+                        },
                         modifier = Modifier
                             .weight(1f)
-                            .padding(horizontal = 4.dp, vertical = 10.dp),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        if (inputText.isEmpty()) {
-                            Text(
-                                text = if (isModelMissing) "Model required to chat…" else "Talk to Maia…",
-                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 15.sp),
-                                color = MaiaTheme.colors.inkMuted.copy(alpha = 0.65f)
-                            )
-                        }
-                        androidx.compose.foundation.text.BasicTextField(
-                            value = inputText,
-                            onValueChange = { inputText = it },
-                            enabled = !isModelMissing && !isModelLoading,
-                            textStyle = MaterialTheme.typography.bodyLarge.copy(
-                                fontSize = 15.sp,
-                                color = MaiaTheme.colors.ink
-                            ),
-                            cursorBrush = androidx.compose.ui.graphics.SolidColor(MaiaTheme.colors.maiaPresence),
-                            maxLines = 4,
-                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
-                            keyboardActions = KeyboardActions(
-                                onSend = {
-                                    if (inputText.isNotBlank() && !isModelMissing && !isModelLoading) {
-                                        viewModel.sendMessage(inputText)
-                                        inputText = ""
-                                        keyboardController?.hide()
-                                    }
-                                }
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .testTag("chat_input_field")
-                        )
-                    }
+                            .testTag("chat_input_field")
+                    )
 
                     Spacer(modifier = Modifier.width(6.dp))
 
