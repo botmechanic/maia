@@ -41,6 +41,7 @@ android {
   buildFeatures {
     buildConfig = true
   }
+  assetPacks += listOf(":model_pack")
   testOptions { unitTests { isIncludeAndroidResources = true } }
 }
 

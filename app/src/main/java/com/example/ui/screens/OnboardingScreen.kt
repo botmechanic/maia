@@ -252,6 +252,28 @@ fun StepOneIntro() {
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 24.dp)
         )
+
+        val context = androidx.compose.ui.platform.LocalContext.current
+        val ramReport = remember { com.example.core.runtime.DeviceCapabilityChecker.inspect(context) }
+        ramReport.compatibilityNotice?.let { notice ->
+            Spacer(modifier = Modifier.height(20.dp))
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp),
+                shape = RoundedCornerShape(16.dp),
+                color = MaiaTheme.colors.surface,
+                border = BorderStroke(1.dp, MaiaTheme.colors.hairline)
+            ) {
+                Text(
+                    text = notice,
+                    style = MaterialTheme.typography.bodySmall.copy(lineHeight = 18.sp),
+                    color = MaiaTheme.colors.inkMuted,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                )
+            }
+        }
     }
 }
 

@@ -27,3 +27,5 @@ bin/
 **/bin/
 .vscode/
 .claude/
+model_pack/src/main/assets/models/*.task
+model_pack/src/main/assets/models/*.tflite

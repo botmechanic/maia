@@ -78,6 +78,11 @@ class MediaPipeModelRuntime(private val context: Context) : ModelRuntime {
             }
         }
 
+        // Check if Google Play Asset Delivery (:model_pack) bundled a model in assets/models/
+        BundledModelExtractor.ensureExtracted(context, candidates)?.let { staged ->
+            return staged.absolutePath
+        }
+
         // Default to primary external path + preferred LiteRT filename for install instructions
         val preferredName = candidates.first()
         val primaryDir = searchDirs.firstOrNull() ?: File(context.filesDir, "models")

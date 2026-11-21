@@ -34,7 +34,13 @@ class MediaPipeEmbeddingService(private val context: Context) : EmbeddingService
     @Synchronized
     override fun initializeEmbedder(): Boolean {
         val extDir = context.getExternalFilesDir("models")
-        val modelFile = if (extDir != null) File(extDir, "universal_sentence_encoder.tflite") else null
+        val internalDir = File(context.filesDir, "models")
+        val candidates = listOf(
+            extDir?.let { File(it, "universal_sentence_encoder.tflite") },
+            File(internalDir, "universal_sentence_encoder.tflite")
+        )
+        val modelFile = candidates.firstOrNull { it != null && it.exists() }
+            ?: BundledModelExtractor.ensureExtracted(context, listOf("universal_sentence_encoder.tflite"))
 
         if (modelFile == null || !modelFile.exists()) {
             Log.w(TAG, "USE model file not found. Semantic memory is degraded.")
