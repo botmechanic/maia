@@ -32,5 +32,14 @@ class CrisisInterventionTest {
         assertTrue(response.contains("741741"))
         assertTrue(response.contains("Trevor Project"))
     }
+
+    @Test
+    fun detectsMultilingualCrisisDisclosures() {
+        assertTrue(CrisisIntervention.isCrisisDisclosure("J'ai envie de mourir ce soir"))
+        assertTrue(CrisisIntervention.isCrisisDisclosure("Quiero morir, no puedo más"))
+        assertTrue(CrisisIntervention.isCrisisDisclosure("Eu quero morrer"))
+        assertTrue(CrisisIntervention.isCrisisDisclosure("Ich will sterben"))
+        assertTrue(CrisisIntervention.isCrisisDisclosure("もう死にたいです"))
+    }
 }
 

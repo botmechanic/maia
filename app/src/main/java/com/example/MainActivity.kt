@@ -26,7 +26,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.core.design.R as DesignR
 import com.example.core.design.components.MaiaFloatingNavBar
 import com.example.core.design.components.MaiaNavDestination
 import com.example.core.design.theme.MaiaTheme
@@ -118,16 +120,16 @@ class MainActivity : FragmentActivity() {
                                     destinations = listOf(
                                         MaiaNavDestination(
                                             id = "chat",
-                                            label = "Talk",
+                                            label = stringResource(DesignR.string.nav_talk),
                                             icon = androidx.compose.material.icons.Icons.Outlined.ChatBubbleOutline,
-                                            contentDescription = "Talk with Maia",
+                                            contentDescription = stringResource(DesignR.string.nav_talk),
                                             testTag = "nav_tab_chat"
                                         ),
                                         MaiaNavDestination(
                                             id = "memory",
-                                            label = "Remembers",
+                                            label = stringResource(DesignR.string.nav_remembers),
                                             icon = androidx.compose.material.icons.Icons.Outlined.AutoAwesome,
-                                            contentDescription = "What Maia Remembers",
+                                            contentDescription = stringResource(DesignR.string.nav_remembers),
                                             testTag = "nav_tab_memory"
                                         )
                                     ),

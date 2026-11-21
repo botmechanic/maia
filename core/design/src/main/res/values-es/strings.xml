@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation -->
+    <string name="nav_talk">Hablar</string>
+    <string name="nav_remembers">Recuerdos</string>
+    <string name="status_on_device">EN EL DISPOSITIVO</string>
+    <string name="status_thinking">PENSANDO</string>
+    <string name="status_waking_up">INICIANDO</string>
+    <string name="status_offline">SIN CONEXIÓN</string>
+    <string name="status_offline_core">NÚCLEO LOCAL</string>
+    <string name="status_vault_locked">BÓVEDA BLOQUEADA</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Omitir</string>
+    <string name="onboarding_welcome_title">Hola, soy Maia</string>
+    <string name="onboarding_welcome_subtitle">Una compañera que vive solo en tu teléfono.</string>
+    <string name="onboarding_get_started">Comenzar</string>
+    <string name="onboarding_continue">Continuar</string>
+    <string name="onboarding_begin">Empecemos</string>
+    <string name="onboarding_footer">Sin nube  ·  Sin cuenta requerida</string>
+    <string name="onboarding_privacy_title">Privada por diseño</string>
+    <string name="onboarding_privacy_subtitle">Todo permanece estrictamente en tu teléfono.</string>
+    <string name="onboarding_priv_no_net_title">Sin acceso a Internet</string>
+    <string name="onboarding_priv_no_net_sub">Cero permisos de red en la aplicación.</string>
+    <string name="onboarding_priv_enc_title">Cifrada en este teléfono</string>
+    <string name="onboarding_priv_enc_sub">Bóveda AES-256 respaldada por hardware seguro.</string>
+    <string name="onboarding_priv_local_title">Nada sale de tu dispositivo</string>
+    <string name="onboarding_priv_local_sub">Cero telemetría, cero nube, sin rastreo.</string>
+    <string name="onboarding_name_title">¿Cómo debo llamarte?</string>
+    <string name="onboarding_name_subtitle">Guardado solo dentro de tu bóveda cifrada.</string>
+    <string name="onboarding_name_placeholder">Tu nombre (opcional)</string>
+
+    <!-- Chat / Talk -->
+    <string name="chat_placeholder">Habla con Maia…</string>
+    <string name="chat_placeholder_missing">Se requiere modelo para chatear…</string>
+    <string name="chat_tagline">Ella recuerda. Ella protege. Es tuya.</string>
+    <string name="chat_empty_sub">Guardo todo aquí en tu teléfono.\nNada sale a menos que tú lo decidas.</string>
+
+    <!-- Remembers / Vault -->
+    <string name="remembers_title">Lo que sé</string>
+    <string name="remembers_subtitle">%1$d recuerdos · Cifrados en este teléfono</string>
+    <string name="remembers_tab_list">Lista</string>
+    <string name="remembers_tab_timeline">Cronología</string>
+    <string name="remembers_tab_explore">Explorar</string>
+
+    <!-- Biometric Lock -->
+    <string name="lock_title">Maia está bloqueada</string>
+    <string name="lock_subtitle">Usa tu huella o bloqueo de pantalla para continuar.</string>
+    <string name="lock_cta">Desbloquear con huella</string>
+    <string name="lock_prompt_title">Desbloquear Maia</string>
+    <string name="lock_prompt_subtitle">Confirma tu huella o bloqueo de pantalla</string>
+
+    <!-- Privacy Card -->
+    <string name="privacy_zero_bytes">0 bytes enviados</string>
+    <string name="privacy_zero_net_sub">Cero permisos de Internet en el binario</string>
+    <string name="privacy_verified">Verificado</string>
+    <string name="privacy_encrypted_vault">Bóveda cifrada</string>
+    <string name="privacy_key_protection">Protección de clave</string>
+    <string name="privacy_trackers">Rastreadores y SDKs</string>
+    <string name="privacy_zero_installed">0 instalados</string>
+    <string name="privacy_biometric_title">Bloqueo biométrico</string>
+    <string name="privacy_biometric_sub">Pedir huella o PIN al abrir Maia.</string>
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation -->
+    <string name="nav_talk">Parler</string>
+    <string name="nav_remembers">Souvenirs</string>
+    <string name="status_on_device">SUR L\'APPAREIL</string>
+    <string name="status_thinking">RÉFLEXION</string>
+    <string name="status_waking_up">DÉMARRAGE</string>
+    <string name="status_offline">HORS LIGNE</string>
+    <string name="status_offline_core">CŒUR HORS LIGNE</string>
+    <string name="status_vault_locked">COFFRE VERROUILLÉ</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Ignorer</string>
+    <string name="onboarding_welcome_title">Bonjour, je suis Maia</string>
+    <string name="onboarding_welcome_subtitle">Une compagne qui vit uniquement sur votre téléphone.</string>
+    <string name="onboarding_get_started">Commencer</string>
+    <string name="onboarding_continue">Continuer</string>
+    <string name="onboarding_begin">C\'est parti</string>
+    <string name="onboarding_footer">Sans cloud  ·  Sans compte requis</string>
+    <string name="onboarding_privacy_title">Privée par conception</string>
+    <string name="onboarding_privacy_subtitle">Tout reste strictement dans votre téléphone.</string>
+    <string name="onboarding_priv_no_net_title">Aucun accès Internet</string>
+    <string name="onboarding_priv_no_net_sub">Zéro permission réseau dans l\'application.</string>
+    <string name="onboarding_priv_enc_title">Chiffrée sur ce téléphone</string>
+    <string name="onboarding_priv_enc_sub">Coffre AES-256 protégé par le matériel sécurisé.</string>
+    <string name="onboarding_priv_local_title">Rien ne quitte votre appareil</string>
+    <string name="onboarding_priv_local_sub">Zéro télémétrie, zéro synchronisation cloud.</string>
+    <string name="onboarding_name_title">Comment dois-je vous appeler ?</string>
+    <string name="onboarding_name_subtitle">Stocké uniquement dans votre coffre chiffré.</string>
+    <string name="onboarding_name_placeholder">Votre prénom (facultatif)</string>
+
+    <!-- Chat / Talk -->
+    <string name="chat_placeholder">Parler à Maia…</string>
+    <string name="chat_placeholder_missing">Modèle requis pour discuter…</string>
+    <string name="chat_tagline">Elle se souvient. Elle protège. Elle est à vous.</string>
+    <string name="chat_empty_sub">Je garde tout ici sur votre téléphone.\nRien ne sort sans votre accord.</string>
+
+    <!-- Remembers / Vault -->
+    <string name="remembers_title">Ce que je sais</string>
+    <string name="remembers_subtitle">%1$d souvenirs · Chiffrés sur ce téléphone</string>
+    <string name="remembers_tab_list">Liste</string>
+    <string name="remembers_tab_timeline">Chronologie</string>
+    <string name="remembers_tab_explore">Explorer</string>
+
+    <!-- Biometric Lock -->
+    <string name="lock_title">Maia est verrouillée</string>
+    <string name="lock_subtitle">Utilisez votre empreinte ou votre code pour continuer.</string>
+    <string name="lock_cta">Déverrouiller par empreinte</string>
+    <string name="lock_prompt_title">Déverrouiller Maia</string>
+    <string name="lock_prompt_subtitle">Confirmez votre empreinte ou verrouillage d\'écran</string>
+
+    <!-- Privacy Card -->
+    <string name="privacy_zero_bytes">0 octet envoyé</string>
+    <string name="privacy_zero_net_sub">Zéro permission Internet dans le binaire</string>
+    <string name="privacy_verified">Vérifié</string>
+    <string name="privacy_encrypted_vault">Coffre chiffré</string>
+    <string name="privacy_key_protection">Protection de la clé</string>
+    <string name="privacy_trackers">Traceurs et SDK</string>
+    <string name="privacy_zero_installed">0 installé</string>
+    <string name="privacy_biometric_title">Verrouillage biométrique</string>
+    <string name="privacy_biometric_sub">Exiger l\'empreinte digitale à l\'ouverture de Maia.</string>
+</resources>

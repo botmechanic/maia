@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation -->
+    <string name="nav_talk">Talk</string>
+    <string name="nav_remembers">Remembers</string>
+    <string name="status_on_device">ON DEVICE</string>
+    <string name="status_thinking">THINKING</string>
+    <string name="status_waking_up">WAKING UP</string>
+    <string name="status_offline">OFFLINE</string>
+    <string name="status_offline_core">OFFLINE CORE</string>
+    <string name="status_vault_locked">VAULT LOCKED</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_welcome_title">Hi, I\'m Maia</string>
+    <string name="onboarding_welcome_subtitle">A companion that lives only on your phone.</string>
+    <string name="onboarding_get_started">Get started</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_begin">Let\'s begin</string>
+    <string name="onboarding_footer">No cloud  ·  No account required</string>
+    <string name="onboarding_privacy_title">Private by design</string>
+    <string name="onboarding_privacy_subtitle">Everything stays strictly inside your phone.</string>
+    <string name="onboarding_priv_no_net_title">No internet access</string>
+    <string name="onboarding_priv_no_net_sub">Zero network permissions in the app binary.</string>
+    <string name="onboarding_priv_enc_title">Encrypted on this phone</string>
+    <string name="onboarding_priv_enc_sub">AES-256 vault backed by secure hardware.</string>
+    <string name="onboarding_priv_local_title">Nothing leaves your device</string>
+    <string name="onboarding_priv_local_sub">Zero telemetry, zero cloud sync, no tracking.</string>
+    <string name="onboarding_name_title">What should I call you?</string>
+    <string name="onboarding_name_subtitle">Stored only inside your encrypted vault.</string>
+    <string name="onboarding_name_placeholder">Your first name (optional)</string>
+
+    <!-- Chat / Talk -->
+    <string name="chat_placeholder">Talk to Maia…</string>
+    <string name="chat_placeholder_missing">Model required to chat…</string>
+    <string name="chat_tagline">She remembers. She protects. She\'s yours.</string>
+    <string name="chat_empty_sub">I keep everything here on your phone.\nNothing leaves unless you say so.</string>
+
+    <!-- Remembers / Vault -->
+    <string name="remembers_title">What I know</string>
+    <string name="remembers_subtitle">%1$d memories · Encrypted on this phone</string>
+    <string name="remembers_tab_list">List</string>
+    <string name="remembers_tab_timeline">Timeline</string>
+    <string name="remembers_tab_explore">Explore</string>
+
+    <!-- Biometric Lock -->
+    <string name="lock_title">Maia is locked</string>
+    <string name="lock_subtitle">Use your fingerprint or screen lock to continue.</string>
+    <string name="lock_cta">Unlock with Fingerprint</string>
+    <string name="lock_prompt_title">Unlock Maia</string>
+    <string name="lock_prompt_subtitle">Confirm your fingerprint or screen lock</string>
+
+    <!-- Privacy Card -->
+    <string name="privacy_zero_bytes">0 bytes sent</string>
+    <string name="privacy_zero_net_sub">Zero internet permission in binary</string>
+    <string name="privacy_verified">Verified</string>
+    <string name="privacy_encrypted_vault">Encrypted vault</string>
+    <string name="privacy_key_protection">Key protection</string>
+    <string name="privacy_trackers">Trackers &amp; SDKs</string>
+    <string name="privacy_zero_installed">0 installed</string>
+    <string name="privacy_biometric_title">Biometric App &amp; Vault Lock</string>
+    <string name="privacy_biometric_sub">Require fingerprint or screen lock when opening Maia.</string>
+</resources>

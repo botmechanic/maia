@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation -->
+    <string name="nav_talk">トーク</string>
+    <string name="nav_remembers">記憶</string>
+    <string name="status_on_device">オンデバイス</string>
+    <string name="status_thinking">思考中</string>
+    <string name="status_waking_up">起動中</string>
+    <string name="status_offline">オフライン</string>
+    <string name="status_offline_core">オフラインコア</string>
+    <string name="status_vault_locked">ロック中</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">スキップ</string>
+    <string name="onboarding_welcome_title">こんにちは、Maiaです</string>
+    <string name="onboarding_welcome_subtitle">あなたのスマホの中だけで生きるパートナー。</string>
+    <string name="onboarding_get_started">はじめる</string>
+    <string name="onboarding_continue">続ける</string>
+    <string name="onboarding_begin">始めましょう</string>
+    <string name="onboarding_footer">クラウドなし  ·  アカウント不要</string>
+    <string name="onboarding_privacy_title">設計からプライベート</string>
+    <string name="onboarding_privacy_subtitle">すべてのデータはスマホの中だけにとどまります。</string>
+    <string name="onboarding_priv_no_net_title">インターネット権限ゼロ</string>
+    <string name="onboarding_priv_no_net_sub">アプリにネットワーク権限は一切ありません。</string>
+    <string name="onboarding_priv_enc_title">端末内で暗号化</string>
+    <string name="onboarding_priv_enc_sub">セキュアハードウェア保護のAES-256保管庫。</string>
+    <string name="onboarding_priv_local_title">外部への送信ゼロ</string>
+    <string name="onboarding_priv_local_sub">テレメトリなし、クラウド同期なし、追跡なし。</string>
+    <string name="onboarding_name_title">何とお呼びしましょうか？</string>
+    <string name="onboarding_name_subtitle">暗号化された保管庫内にのみ保存されます。</string>
+    <string name="onboarding_name_placeholder">お名前（任意）</string>
+
+    <!-- Chat / Talk -->
+    <string name="chat_placeholder">Maiaに話しかける…</string>
+    <string name="chat_placeholder_missing">チャットにはモデルが必要です…</string>
+    <string name="chat_tagline">記憶し、守り、あなただけの存在。</string>
+    <string name="chat_empty_sub">すべてこのスマホの中に大切に保管します。\n許可なく外へ出ることはありません。</string>
+
+    <!-- Remembers / Vault -->
+    <string name="remembers_title">覚えていること</string>
+    <string name="remembers_subtitle">%1$d 件の記憶 · 端末内で暗号化</string>
+    <string name="remembers_tab_list">リスト</string>
+    <string name="remembers_tab_timeline">タイムライン</string>
+    <string name="remembers_tab_explore">マップ</string>
+
+    <!-- Biometric Lock -->
+    <string name="lock_title">Maiaはロックされています</string>
+    <string name="lock_subtitle">指紋または画面ロックで解除してください。</string>
+    <string name="lock_cta">指紋認証でロック解除</string>
+    <string name="lock_prompt_title">Maiaのロックを解除</string>
+    <string name="lock_prompt_subtitle">指紋または画面ロックを確認してください</string>
+
+    <!-- Privacy Card -->
+    <string name="privacy_zero_bytes">送信データ 0 バイト</string>
+    <string name="privacy_zero_net_sub">アプリにインターネット権限なし</string>
+    <string name="privacy_verified">検証済み</string>
+    <string name="privacy_encrypted_vault">暗号化保管庫</string>
+    <string name="privacy_key_protection">鍵の保護</string>
+    <string name="privacy_trackers">トラッカー・SDK</string>
+    <string name="privacy_zero_installed">0 件</string>
+    <string name="privacy_biometric_title">生体認証ロック</string>
+    <string name="privacy_biometric_sub">Maia起動時に指紋または画面ロックを要求します。</string>
+</resources>

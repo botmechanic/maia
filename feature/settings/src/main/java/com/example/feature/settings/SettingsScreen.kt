@@ -72,6 +72,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.example.core.design.R as DesignR
 import com.example.core.design.theme.MaiaTheme
 
 @Composable
@@ -406,8 +408,8 @@ fun SettingsScreen(
 
             SettingsToggleRow(
                 icon = Icons.Default.Lock,
-                title = "Biometric App & Vault Lock",
-                subtitle = "Require fingerprint or screen lock when opening Maia.",
+                title = stringResource(DesignR.string.privacy_biometric_title),
+                subtitle = stringResource(DesignR.string.privacy_biometric_sub),
                 checked = biometricLockEnabled,
                 onCheckedChange = { enable ->
                     if (!enable) {
@@ -513,7 +515,7 @@ fun SettingsScreen(
                             ) {
                                 Column {
                                     Text(
-                                        text = "0 bytes sent",
+                                        text = stringResource(DesignR.string.privacy_zero_bytes),
                                         style = MaterialTheme.typography.headlineSmall.copy(
                                             fontSize = 24.sp,
                                             fontWeight = FontWeight.Bold,
@@ -522,7 +524,7 @@ fun SettingsScreen(
                                         color = MaiaTheme.colors.ink
                                     )
                                     Text(
-                                        text = "Zero internet permission in binary",
+                                        text = stringResource(DesignR.string.privacy_zero_net_sub),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaiaTheme.colors.inkMuted
                                     )
@@ -532,7 +534,7 @@ fun SettingsScreen(
                                     color = MaiaTheme.colors.success.copy(alpha = 0.12f)
                                 ) {
                                     Text(
-                                        text = "Verified",
+                                        text = stringResource(DesignR.string.privacy_verified),
                                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                                         color = MaiaTheme.colors.success,
                                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
@@ -548,7 +550,7 @@ fun SettingsScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text("Encrypted vault", style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
+                                Text(stringResource(DesignR.string.privacy_encrypted_vault), style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
                                 Text(
                                     "${viewModel.getEncryptedDatabaseSizeBytes() / 1024} KB · AES-256",
                                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
@@ -560,7 +562,7 @@ fun SettingsScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text("Key protection", style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
+                                Text(stringResource(DesignR.string.privacy_key_protection), style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
                                 Text(
                                     viewModel.getKeySecurityLevelDescription(),
                                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
@@ -572,9 +574,9 @@ fun SettingsScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text("Trackers & SDKs", style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
+                                Text(stringResource(DesignR.string.privacy_trackers), style = MaterialTheme.typography.bodySmall, color = MaiaTheme.colors.inkMuted)
                                 Text(
-                                    "0 installed",
+                                    stringResource(DesignR.string.privacy_zero_installed),
                                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
                                     color = MaiaTheme.colors.ink
                                 )

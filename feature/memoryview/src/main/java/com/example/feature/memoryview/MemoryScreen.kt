@@ -83,6 +83,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.compose.ui.res.stringResource
+import com.example.core.design.R as DesignR
 import com.example.core.design.theme.MaiaTheme
 import com.example.core.model.EpisodicEvent
 import com.example.core.model.ProfileFact
@@ -282,7 +284,7 @@ fun MemoryScreen(
                         color = MaiaTheme.colors.ink
                     )
                     Spacer(modifier = Modifier.width(10.dp))
-                    com.example.core.design.components.MaiaOnDevicePill(label = "ON DEVICE")
+                    com.example.core.design.components.MaiaOnDevicePill(label = stringResource(DesignR.string.status_on_device))
                 }
 
                 IconButton(
@@ -308,7 +310,7 @@ fun MemoryScreen(
                     .padding(top = 4.dp, bottom = 14.dp)
             ) {
                 Text(
-                    text = "What I know",
+                    text = stringResource(DesignR.string.remembers_title),
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
@@ -318,7 +320,7 @@ fun MemoryScreen(
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = "${activeFacts.size} memories · Encrypted on this phone",
+                    text = stringResource(DesignR.string.remembers_subtitle, activeFacts.size),
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
                     color = MaiaTheme.colors.inkMuted
                 )
@@ -340,9 +342,9 @@ fun MemoryScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     listOf(
-                        Triple("list", "List", Icons.AutoMirrored.Filled.List),
-                        Triple("timeline", "Timeline", Icons.Default.History),
-                        Triple("mindmap", "Explore", Icons.Default.AccountTree)
+                        Triple("list", stringResource(DesignR.string.remembers_tab_list), Icons.AutoMirrored.Filled.List),
+                        Triple("timeline", stringResource(DesignR.string.remembers_tab_timeline), Icons.Default.History),
+                        Triple("mindmap", stringResource(DesignR.string.remembers_tab_explore), Icons.Default.AccountTree)
                     ).forEach { (mode, label, icon) ->
                         val isSelected = memoryViewMode == mode
                         Surface(

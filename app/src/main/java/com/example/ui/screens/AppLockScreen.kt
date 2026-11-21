@@ -29,10 +29,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.core.design.R as DesignR
 import com.example.core.design.components.MaiaOnDevicePill
 import com.example.core.design.components.MaiaOrb
 import com.example.core.design.theme.MaiaTheme
@@ -49,13 +51,16 @@ fun AppLockScreen(
 ) {
     val context = LocalContext.current
 
+    val promptTitle = stringResource(DesignR.string.lock_prompt_title)
+    val promptSubtitle = stringResource(DesignR.string.lock_prompt_subtitle)
+
     fun triggerPrompt() {
         val activity = BiometricAuthHelper.findFragmentActivity(context)
         if (activity != null && BiometricAuthHelper.canAuthenticate(context)) {
             BiometricAuthHelper.authenticate(
                 activity = activity,
-                title = "Unlock Maia",
-                subtitle = "Confirm your fingerprint or screen lock",
+                title = promptTitle,
+                subtitle = promptSubtitle,
                 onSuccess = onUnlocked,
                 onError = { msg ->
                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
@@ -80,7 +85,7 @@ fun AppLockScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        MaiaOnDevicePill(label = "VAULT LOCKED")
+        MaiaOnDevicePill(label = stringResource(DesignR.string.status_vault_locked))
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -89,7 +94,7 @@ fun AppLockScreen(
             MaiaOrb(size = 84.dp)
             Spacer(modifier = Modifier.height(28.dp))
             Text(
-                text = "Maia is locked",
+                text = stringResource(DesignR.string.lock_title),
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
@@ -100,7 +105,7 @@ fun AppLockScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Use your fingerprint or screen lock to continue.",
+                text = stringResource(DesignR.string.lock_subtitle),
                 style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
                 color = MaiaTheme.colors.inkMuted,
                 textAlign = TextAlign.Center
@@ -127,7 +132,7 @@ fun AppLockScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Unlock with Fingerprint",
+                    text = stringResource(DesignR.string.lock_cta),
                     style = MaterialTheme.typography.titleSmall.copy(
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold

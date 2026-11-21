@@ -28,7 +28,11 @@ class MaiaVoiceManager(private val context: Context) : TextToSpeech.OnInitListen
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             tts?.let { engine ->
-                val result = engine.setLanguage(Locale.US)
+                val deviceLocale = Locale.getDefault()
+                var result = engine.setLanguage(deviceLocale)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    result = engine.setLanguage(Locale.US)
+                }
                 if (result != TextToSpeech.LANG_MISSING_DATA && result != TextToSpeech.LANG_NOT_SUPPORTED) {
                     // Warm, grounded, calm cadence
                     engine.setPitch(0.92f)

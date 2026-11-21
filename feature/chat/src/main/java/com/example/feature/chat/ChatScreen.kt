@@ -1,5 +1,7 @@
 package com.example.feature.chat
 
+import androidx.compose.ui.res.stringResource
+import com.example.core.design.R as DesignR
 import com.example.core.design.theme.MaiaTheme
 
 import android.app.Activity
@@ -428,7 +430,7 @@ fun ChatScreen(
                             ) {
                                 if (inputText.isEmpty()) {
                                     Text(
-                                        text = if (isModelMissing) "Model required to chat…" else "Talk to Maia…",
+                                        text = if (isModelMissing) stringResource(DesignR.string.chat_placeholder_missing) else stringResource(DesignR.string.chat_placeholder),
                                         style = MaterialTheme.typography.bodyLarge.copy(fontSize = 15.sp),
                                         color = MaiaTheme.colors.inkMuted.copy(alpha = 0.65f)
                                     )
@@ -536,12 +538,12 @@ fun MaiaHeaderPresence(
                     Spacer(modifier = Modifier.width(10.dp))
 
                     val pillLabel = when {
-                        isModelLoading -> "WAKING UP"
-                        isThinking -> "THINKING"
-                        isModelMissing -> "OFFLINE"
+                        isModelLoading -> stringResource(DesignR.string.status_waking_up)
+                        isThinking -> stringResource(DesignR.string.status_thinking)
+                        isModelMissing -> stringResource(DesignR.string.status_offline)
                         showTelemetry && lastMetrics != null && lastMetrics.tokensPerSecond > 0f ->
                             String.format(Locale.US, "%.1f TOK/S", lastMetrics.tokensPerSecond)
-                        else -> "ON DEVICE"
+                        else -> stringResource(DesignR.string.status_on_device)
                     }
                     com.example.core.design.components.MaiaOnDevicePill(
                         label = pillLabel,

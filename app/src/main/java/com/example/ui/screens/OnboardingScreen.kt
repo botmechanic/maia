@@ -50,11 +50,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.AppShellViewModel
+import com.example.core.design.R as DesignR
 import com.example.core.design.components.MaiaOnDevicePill
 import com.example.core.design.components.MaiaOrb
 import com.example.core.design.theme.MaiaTheme
@@ -85,7 +87,7 @@ fun OnboardingScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            MaiaOnDevicePill(label = "OFFLINE CORE")
+            MaiaOnDevicePill(label = stringResource(DesignR.string.status_offline_core))
             TextButton(
                 onClick = { viewModel.completeOnboarding() },
                 modifier = Modifier.testTag("skip_onboarding_button"),
@@ -94,7 +96,7 @@ fun OnboardingScreen(
                 )
             ) {
                 Text(
-                    text = "Skip",
+                    text = stringResource(DesignR.string.onboarding_skip),
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium)
                 )
             }
@@ -183,9 +185,9 @@ fun OnboardingScreen(
                 ) {
                     Text(
                         text = when (step) {
-                            1 -> "Get started"
-                            2 -> "Continue"
-                            else -> "Let's begin"
+                            1 -> stringResource(DesignR.string.onboarding_get_started)
+                            2 -> stringResource(DesignR.string.onboarding_continue)
+                            else -> stringResource(DesignR.string.onboarding_begin)
                         },
                         style = MaterialTheme.typography.titleSmall.copy(
                             fontSize = 16.sp,
@@ -206,7 +208,7 @@ fun OnboardingScreen(
             Spacer(modifier = Modifier.height(14.dp))
 
             Text(
-                text = "No cloud  ·  No account required",
+                text = stringResource(DesignR.string.onboarding_footer),
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                 color = MaiaTheme.colors.inkMuted
             )
@@ -230,7 +232,7 @@ fun StepOneIntro() {
         Spacer(modifier = Modifier.height(32.dp))
 
         Text(
-            text = "Hi, I'm Maia",
+            text = stringResource(DesignR.string.onboarding_welcome_title),
             style = MaterialTheme.typography.headlineLarge.copy(
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
@@ -243,7 +245,7 @@ fun StepOneIntro() {
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
-            text = "A companion that lives only on your phone.",
+            text = stringResource(DesignR.string.onboarding_welcome_subtitle),
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = 17.sp,
                 lineHeight = 25.sp
@@ -284,7 +286,7 @@ fun StepTwoPrivacy() {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            text = "Private by design",
+            text = stringResource(DesignR.string.onboarding_privacy_title),
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
@@ -296,7 +298,7 @@ fun StepTwoPrivacy() {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Everything stays strictly inside your phone.",
+            text = stringResource(DesignR.string.onboarding_privacy_subtitle),
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = 16.sp,
                 lineHeight = 24.sp
@@ -310,20 +312,20 @@ fun StepTwoPrivacy() {
             PrivacyHighlightCard(
                 icon = Icons.Outlined.Lock,
                 tint = MaiaTheme.colors.maiaPresence,
-                title = "No internet access",
-                subtitle = "Zero network permissions in the app binary."
+                title = stringResource(DesignR.string.onboarding_priv_no_net_title),
+                subtitle = stringResource(DesignR.string.onboarding_priv_no_net_sub)
             )
             PrivacyHighlightCard(
                 icon = Icons.Outlined.Memory,
                 tint = MaiaTheme.colors.success,
-                title = "Encrypted on this phone",
-                subtitle = "AES-256 vault backed by secure hardware."
+                title = stringResource(DesignR.string.onboarding_priv_enc_title),
+                subtitle = stringResource(DesignR.string.onboarding_priv_enc_sub)
             )
             PrivacyHighlightCard(
                 icon = Icons.Outlined.VisibilityOff,
                 tint = MaiaTheme.colors.inkMuted,
-                title = "Nothing leaves your device",
-                subtitle = "Zero telemetry, zero cloud sync, no tracking."
+                title = stringResource(DesignR.string.onboarding_priv_local_title),
+                subtitle = stringResource(DesignR.string.onboarding_priv_local_sub)
             )
         }
     }
@@ -403,7 +405,7 @@ fun StepThreeName(
         Spacer(modifier = Modifier.height(28.dp))
 
         Text(
-            text = "What should I call you?",
+            text = stringResource(DesignR.string.onboarding_name_title),
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
@@ -416,7 +418,7 @@ fun StepThreeName(
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = "Stored only inside your encrypted vault.",
+            text = stringResource(DesignR.string.onboarding_name_subtitle),
             style = MaterialTheme.typography.bodyMedium.copy(fontSize = 15.sp),
             color = MaiaTheme.colors.inkMuted,
             textAlign = TextAlign.Center
@@ -429,7 +431,7 @@ fun StepThreeName(
             onValueChange = onNameChange,
             placeholder = {
                 Text(
-                    text = "Your first name (optional)",
+                    text = stringResource(DesignR.string.onboarding_name_placeholder),
                     color = MaiaTheme.colors.inkMuted.copy(alpha = 0.65f)
                 )
             },

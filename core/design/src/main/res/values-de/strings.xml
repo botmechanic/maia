@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Navigation -->
+    <string name="nav_talk">Gespräch</string>
+    <string name="nav_remembers">Erinnerungen</string>
+    <string name="status_on_device">AUF DEM GERÄT</string>
+    <string name="status_thinking">DENKT NACH</string>
+    <string name="status_waking_up">WIRD GESTARTET</string>
+    <string name="status_offline">OFFLINE</string>
+    <string name="status_offline_core">OFFLINE-KERN</string>
+    <string name="status_vault_locked">TRESOR GESPERRT</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Überspringen</string>
+    <string name="onboarding_welcome_title">Hallo, ich bin Maia</string>
+    <string name="onboarding_welcome_subtitle">Eine Begleiterin, die nur auf deinem Smartphone lebt.</string>
+    <string name="onboarding_get_started">Loslegen</string>
+    <string name="onboarding_continue">Weiter</string>
+    <string name="onboarding_begin">Beginnen</string>
+    <string name="onboarding_footer">Keine Cloud  ·  Kein Konto erforderlich</string>
+    <string name="onboarding_privacy_title">Privat von Grund auf</string>
+    <string name="onboarding_privacy_subtitle">Alles bleibt ausschließlich auf deinem Gerät.</string>
+    <string name="onboarding_priv_no_net_title">Kein Internetzugriff</string>
+    <string name="onboarding_priv_no_net_sub">Keine Netzwerkberechtigungen in der App.</string>
+    <string name="onboarding_priv_enc_title">Auf diesem Gerät verschlüsselt</string>
+    <string name="onboarding_priv_enc_sub">AES-256-Tresor, geschützt durch sichere Hardware.</string>
+    <string name="onboarding_priv_local_title">Nichts verlässt dein Gerät</string>
+    <string name="onboarding_priv_local_sub">Keine Telemetrie, kein Cloud-Sync, kein Tracking.</string>
+    <string name="onboarding_name_title">Wie soll ich dich nennen?</string>
+    <string name="onboarding_name_subtitle">Wird nur in deinem verschlüsselten Tresor gespeichert.</string>
+    <string name="onboarding_name_placeholder">Dein Vorname (optional)</string>
+
+    <!-- Chat / Talk -->
+    <string name="chat_placeholder">Mit Maia sprechen…</string>
+    <string name="chat_placeholder_missing">Modell zum Chatten erforderlich…</string>
+    <string name="chat_tagline">Sie erinnert sich. Sie schützt. Sie gehört dir.</string>
+    <string name="chat_empty_sub">Ich bewahre alles hier auf deinem Gerät auf.\nNichts verlässt es ohne deine Zustimmung.</string>
+
+    <!-- Remembers / Vault -->
+    <string name="remembers_title">Was ich weiß</string>
+    <string name="remembers_subtitle">%1$d Erinnerungen · Auf diesem Gerät verschlüsselt</string>
+    <string name="remembers_tab_list">Liste</string>
+    <string name="remembers_tab_timeline">Zeitachse</string>
+    <string name="remembers_tab_explore">Entdecken</string>
+
+    <!-- Biometric Lock -->
+    <string name="lock_title">Maia ist gesperrt</string>
+    <string name="lock_subtitle">Entsperre mit Fingerabdruck oder Displaysperre.</string>
+    <string name="lock_cta">Mit Fingerabdruck entsperren</string>
+    <string name="lock_prompt_title">Maia entsperren</string>
+    <string name="lock_prompt_subtitle">Bestätige Fingerabdruck oder Displaysperre</string>
+
+    <!-- Privacy Card -->
+    <string name="privacy_zero_bytes">0 Bytes gesendet</string>
+    <string name="privacy_zero_net_sub">Keine Internetberechtigung im Binary</string>
+    <string name="privacy_verified">Verifiziert</string>
+    <string name="privacy_encrypted_vault">Verschlüsselter Tresor</string>
+    <string name="privacy_key_protection">Schlüsselschutz</string>
+    <string name="privacy_trackers">Tracker &amp; SDKs</string>
+    <string name="privacy_zero_installed">0 installiert</string>
+    <string name="privacy_biometric_title">Biometrische Sperre</string>
+    <string name="privacy_biometric_sub">Fingerabdruck oder PIN beim Öffnen verlangen.</string>
+</resources>
