@@ -52,7 +52,7 @@
 | :--- | :--- | :--- |
 | **App Icon** | `512 × 512` PNG (≤ 1 MB) | Ready: [`docs/images/play-store-icon-512.png`](images/play-store-icon-512.png) |
 | **Phone Screenshots** | Min 2, recommended 4–8 (`16:9` or `9:16`) | Ready: [`docs/images/screenshots/`](images/screenshots/) (`01_talk.png` – `04_privacy_settings.png`) |
-| **Feature Graphic** | `1024 × 500` PNG/JPG | [ ] Export from your `maia` wordmark (`docs/images/maia-header.png` resized/framed to `1024 × 500`) |
+| **Feature Graphic** | `1024 × 500` PNG/JPG | Ready: [`docs/images/play-store-feature-1024x500.png`](images/play-store-feature-1024x500.png) |
 | **Privacy Policy URL** | Live HTTPS page | [ ] Publish at `https://heymaia.app/privacy` |
 
 ### Suggested Play Store Copy
