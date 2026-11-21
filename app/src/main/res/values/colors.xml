@@ -5,4 +5,5 @@
     <color name="maia_surface">#FFFFFFFF</color>
     <color name="maia_ink">#FF241D15</color>
     <color name="maia_presence">#FFAF4F35</color>
+    <color name="ic_launcher_background">#FFF7F2E9</color>
 </resources>
